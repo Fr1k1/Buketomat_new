@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">Buketomat</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="registration">Registration</string>
+    <string name="ime">Ime</string>
+    <string name="email">Email</string>
+    <string name="lozinka">Lozinka</string>
+    <string name="registriraj_se">Registriraj se</string>
+    <string name="registracija">REGISTRACIJA:</string>
 </resources>

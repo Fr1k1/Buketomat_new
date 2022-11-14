@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.viewpager2.widget.ViewPager2
 import com.example.buketomat.adapters.MainPageAdapter
+import com.example.buketomat.fragments.Orders
 import com.example.buketomat.fragments.Test1
 import com.example.buketomat.fragments.test2
 import com.google.android.material.tabs.TabLayout
@@ -28,7 +29,7 @@ class MainActivity : AppCompatActivity() {
 
         val mainPageAdapter = MainPageAdapter(supportFragmentManager, lifecycle)
         mainPageAdapter.AddFragment(MainPageAdapter.FragmentItem(R.string.tab1,R.drawable.ic_launcher_foreground,Test1::class)) //change this to real fragments not test ones
-        mainPageAdapter.AddFragment(MainPageAdapter.FragmentItem(R.string.tab2,R.drawable.ic_launcher_background,test2::class)) //change this to real fragments not test ones
+        mainPageAdapter.AddFragment(MainPageAdapter.FragmentItem(R.string.orders,R.drawable.ic_baseline_shopping_bag_24,Orders::class)) //adds orders tab
 
         viewPager.adapter = mainPageAdapter
 

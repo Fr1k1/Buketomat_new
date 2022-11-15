@@ -25,3 +25,5 @@ class MainPageAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle) : 
         return fragmentItems[position].fragmentClass.java.newInstance() as Fragment
     }
 }
+
+//tu negde moram dodati svoju registraciju

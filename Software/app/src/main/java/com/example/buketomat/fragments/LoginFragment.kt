@@ -53,23 +53,22 @@ class LoginFragment : Fragment() {
         User("ggabric1@gmail.com", "ggabric", "1111"),)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        btnLogin = view.findViewById(R.id.btnLogin);
+        btnLogin = view.findViewById(R.id.btnLogin)
         btnLogin.setOnClickListener{
-            Log.i("prijava", "klik");
-            etKorime = view.findViewById(R.id.etKorime);
-            etLozinka = view.findViewById(R.id.etLozinka);
-            Log.i("podaci", etKorime.text.toString() + " --- " + etLozinka.text.toString());
+            Log.i("prijava", "klik")
+            etKorime = view.findViewById(R.id.etKorime)
+            etLozinka = view.findViewById(R.id.etLozinka)
+            Log.i("podaci", etKorime.text.toString() + " --- " + etLozinka.text.toString())
 
             var pronaden = false;
             for (element in lista){
                 if (element.username == etKorime.text.toString() && element.password == etLozinka.text.toString()){
-                    Toast.makeText(this.context, "Uspjesno prijavljen!", Toast.LENGTH_LONG).show();
-                    pronaden = true;
+                    Toast.makeText(this.context, "Uspjesno prijavljen!", Toast.LENGTH_LONG).show()
+                    pronaden = true
                 }
             }
             if(pronaden == false){
-                Toast.makeText(this.context, "Neuspjesna prijava!", Toast.LENGTH_LONG).show();
-
+                Toast.makeText(this.context, "Neuspjesna prijava!", Toast.LENGTH_LONG).show()
             }
 
         }

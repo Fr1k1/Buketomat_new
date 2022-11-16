@@ -32,8 +32,8 @@ class MainActivity : AppCompatActivity() {
         mainPageAdapter.AddFragment(MainPageAdapter.FragmentItem(R.string.tab1,R.drawable.ic_launcher_foreground,Test1::class)) //change this to real fragments not test ones
         mainPageAdapter.AddFragment(MainPageAdapter.FragmentItem(R.string.tab2,R.drawable.ic_launcher_background,test2::class)) //change this to real fragments not test ones
         mainPageAdapter.AddFragment(MainPageAdapter.FragmentItem(R.string.registration,R.drawable.ic_launcher_background,RegistrationFragment::class)) //change this to real fragments not test ones
-//ova komentirana linija crasha pitaj filipa
-//tu dodaj svoju klasu nekak bez da crasha
+
+
         viewPager.adapter = mainPageAdapter
 
         TabLayoutMediator(tabLayout,viewPager){

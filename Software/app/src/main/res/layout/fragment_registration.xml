@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:autofillHints="ime"
         android:ems="10"
-        android:hint="@string/ime"
+        android:hint="@string/korime"
         android:inputType="textPersonName"
         android:minHeight="48dp"
         app:layout_constraintBottom_toBottomOf="parent"

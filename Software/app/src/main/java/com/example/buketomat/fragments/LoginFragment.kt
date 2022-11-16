@@ -1,11 +1,16 @@
 package com.example.buketomat.fragments
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.EditText
+import android.widget.Toast
 import com.example.buketomat.R
+import com.example.buketomat.entites.User
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -22,6 +27,10 @@ class LoginFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
+    lateinit var btnLogin : Button;
+    lateinit var etKorime : EditText;
+    lateinit var etLozinka : EditText;
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -36,6 +45,34 @@ class LoginFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_login, container, false)
+    }
+
+    var lista: MutableList <User> = mutableListOf(
+        User("mmarkic1@gmail.com", "mmarkic", "1234"),
+        User("iivic1@gmail.com", "iivic", "5678"),
+        User("ggabric1@gmail.com", "ggabric", "1111"),)
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        btnLogin = view.findViewById(R.id.btnLogin);
+        btnLogin.setOnClickListener{
+            Log.i("prijava", "klik");
+            etKorime = view.findViewById(R.id.etKorime);
+            etLozinka = view.findViewById(R.id.etLozinka);
+            Log.i("podaci", etKorime.text.toString() + " --- " + etLozinka.text.toString());
+
+            var pronaden = false;
+            for (element in lista){
+                if (element.username == etKorime.text.toString() && element.password == etLozinka.text.toString()){
+                    Toast.makeText(this.context, "Uspjesno prijavljen!", Toast.LENGTH_LONG).show();
+                    pronaden = true;
+                }
+            }
+            if(pronaden == false){
+                Toast.makeText(this.context, "Neuspjesna prijava!", Toast.LENGTH_LONG).show();
+
+            }
+
+        }
     }
 
     companion object {

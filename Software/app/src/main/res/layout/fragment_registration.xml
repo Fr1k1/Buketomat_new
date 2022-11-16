@@ -9,7 +9,7 @@
 
 <!--ova linija android:text je sus-->
     <EditText
-        android:id="@+id/name_txt"
+        android:id="@+id/korime_txt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:autofillHints="ime"
@@ -37,7 +37,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/name_txt"
+        app:layout_constraintTop_toBottomOf="@+id/korime_txt"
 
         app:layout_constraintVertical_bias="0.095" />
 

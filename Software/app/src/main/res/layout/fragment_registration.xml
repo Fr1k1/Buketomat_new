@@ -48,7 +48,7 @@
         android:autofillHints="lozinka"
         android:ems="10"
         android:hint="@string/lozinka"
-        android:inputType="numberPassword"
+        android:inputType="textPassword"
         android:minHeight="48dp"
         android:textColorHint="#757575"
         app:layout_constraintBottom_toBottomOf="parent"

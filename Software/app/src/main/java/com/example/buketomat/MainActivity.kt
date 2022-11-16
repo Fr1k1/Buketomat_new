@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.viewpager2.widget.ViewPager2
 import com.example.buketomat.adapters.MainPageAdapter
 import com.example.buketomat.entites.User
+import com.example.buketomat.fragments.LoginFragment
 import com.example.buketomat.fragments.RegistrationFragment
 import com.example.buketomat.fragments.Test1
 import com.example.buketomat.fragments.test2
@@ -31,7 +32,8 @@ class MainActivity : AppCompatActivity() {
         val mainPageAdapter = MainPageAdapter(supportFragmentManager, lifecycle)
         mainPageAdapter.AddFragment(MainPageAdapter.FragmentItem(R.string.tab1,R.drawable.ic_launcher_foreground,Test1::class)) //change this to real fragments not test ones
         mainPageAdapter.AddFragment(MainPageAdapter.FragmentItem(R.string.tab2,R.drawable.ic_launcher_background,test2::class)) //change this to real fragments not test ones
-        mainPageAdapter.AddFragment(MainPageAdapter.FragmentItem(R.string.registration,R.drawable.ic_launcher_background,RegistrationFragment::class)) //change this to real fragments not test ones
+        mainPageAdapter.AddFragment(MainPageAdapter.FragmentItem(R.string.registration, R.drawable.ic_launcher_background,RegistrationFragment::class)) //change this to real fragments not test ones
+        mainPageAdapter.AddFragment(MainPageAdapter.FragmentItem(R.string.login,R.drawable.ic_launcher_background,LoginFragment::class)) //change this to real fragments not test ones
 
 
         viewPager.adapter = mainPageAdapter

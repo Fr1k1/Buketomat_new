@@ -1,8 +1,9 @@
 <resources>
     <string name="app_name">Buketomat</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="tab1">Tab1</string>
     <string name="tab2">Tab2</string>
+    <string name="orders">Narudžbe</string>
+    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="registration">Registration</string>
     <string name="ime">Ime</string>
@@ -13,5 +14,3 @@
     <string name="korime">korime</string>
     <string name="login">Login</string>
 </resources>
-
-    <!--filipovi stringovi+moji-->

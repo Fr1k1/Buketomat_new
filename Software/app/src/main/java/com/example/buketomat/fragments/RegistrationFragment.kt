@@ -12,6 +12,7 @@ import android.widget.EditText
 import android.widget.Toast
 import com.example.buketomat.R
 import com.example.buketomat.entites.User
+import com.example.buketomat.helpers.MockDataLoader
 
 
 class RegistrationFragment : Fragment() {
@@ -24,19 +25,6 @@ class RegistrationFragment : Fragment() {
     lateinit var lozinka: EditText
 
     lateinit var Mail: EditText
-
-
-    /*fun getDemoData(): List<User> = listOf(
-        User("mmarkic1@gmail.com", "mmarkic", "1234"),
-        User("iivic1@gmail.com", "iivic", "5678"),
-        User("ggabric1@gmail.com", "ggabric", "1111"),
-    )*/
-
-    var lista: MutableList <User> = mutableListOf(User("mmarkic1@gmail.com", "mmarkic", "1234"),
-        User("iivic1@gmail.com", "iivic", "5678"),
-        User("ggabric1@gmail.com", "ggabric", "1111"),)
-
-
 
 
     override fun onCreateView(
@@ -56,13 +44,6 @@ class RegistrationFragment : Fragment() {
         lozinka = view.findViewById(R.id.password_txt)
         Mail = view.findViewById(R.id.email_txt)
 
-
-
-
-
-
-
-
         gumb.setOnClickListener {
 
             var korisnik = User(
@@ -71,12 +52,14 @@ class RegistrationFragment : Fragment() {
                 email = Mail.text.toString()
             )
 
-            lista.add(korisnik)
-            for(element in lista) {
+            MockDataLoader.addDemoUsers(korisnik)
+            var list = MockDataLoader.getDemoDataUsers()
+            for(element in list) {
                 Log.i("korisnik",element.toString())
-                println(lista)
+                println(list)
 
             }
+            Toast.makeText(context,"Registracija uspijesna", Toast.LENGTH_LONG).show()
 
         }
     }

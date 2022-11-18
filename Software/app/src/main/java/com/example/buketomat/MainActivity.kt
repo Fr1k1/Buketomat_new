@@ -4,11 +4,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.viewpager2.widget.ViewPager2
 import com.example.buketomat.adapters.MainPageAdapter
-import com.example.buketomat.entites.User
 import com.example.buketomat.fragments.LoginFragment
 import com.example.buketomat.fragments.RegistrationFragment
-import com.example.buketomat.fragments.Test1
-import com.example.buketomat.fragments.test2
+import com.example.buketomat.fragments.Orders
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
@@ -30,11 +28,10 @@ class MainActivity : AppCompatActivity() {
         viewPager= findViewById(R.id.viewpager)
 
         val mainPageAdapter = MainPageAdapter(supportFragmentManager, lifecycle)
-        mainPageAdapter.AddFragment(MainPageAdapter.FragmentItem(R.string.tab1,R.drawable.ic_launcher_foreground,Test1::class)) //change this to real fragments not test ones
-        mainPageAdapter.AddFragment(MainPageAdapter.FragmentItem(R.string.tab2,R.drawable.ic_launcher_background,test2::class)) //change this to real fragments not test ones
-        mainPageAdapter.AddFragment(MainPageAdapter.FragmentItem(R.string.registration, R.drawable.ic_launcher_background,RegistrationFragment::class)) //change this to real fragments not test ones
-        mainPageAdapter.AddFragment(MainPageAdapter.FragmentItem(R.string.login,R.drawable.ic_launcher_background,LoginFragment::class)) //change this to real fragments not test ones
 
+        mainPageAdapter.AddFragment(MainPageAdapter.FragmentItem(R.string.registration, R.drawable.ic_launcher_background,RegistrationFragment::class))
+        mainPageAdapter.AddFragment(MainPageAdapter.FragmentItem(R.string.login,R.drawable.ic_launcher_background,LoginFragment::class))
+        mainPageAdapter.AddFragment(MainPageAdapter.FragmentItem(R.string.orders,R.drawable.ic_baseline_shopping_bag_24,Orders::class))
 
         viewPager.adapter = mainPageAdapter
 
@@ -42,8 +39,6 @@ class MainActivity : AppCompatActivity() {
                 tab,position ->
             tab.setText(mainPageAdapter.fragmentItems[position].titleRes)
             tab.setIcon(mainPageAdapter.fragmentItems[position].iconRes)
-            tab.setIcon(mainPageAdapter.fragmentItems[position].iconRes)
-
         }.attach()
     }
 

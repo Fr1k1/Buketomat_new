@@ -2,8 +2,12 @@ package com.example.buketomat
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.viewpager2.widget.ViewPager2
 import com.example.buketomat.adapters.MainPageAdapter
+import com.example.buketomat.backgroundworkers.NetworkService
+import com.example.buketomat.backgroundworkers.VolleyCallback
+import com.example.buketomat.entites.User
 import com.example.buketomat.fragments.LoginFragment
 import com.example.buketomat.fragments.RegistrationFragment
 import com.example.buketomat.fragments.Orders
@@ -18,9 +22,10 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
         createNavigation()
+
     }
+
 
     private fun createNavigation()
     {

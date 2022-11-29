@@ -1,5 +1,6 @@
 package com.example.buketomat.fragments
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -10,6 +11,8 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import com.example.buketomat.R
+import com.example.buketomat.backgroundworkers.NetworkService
+import com.example.buketomat.backgroundworkers.VolleyCallback
 import com.example.buketomat.entites.User
 import com.example.buketomat.helpers.MockDataLoader
 
@@ -30,6 +33,7 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         btnLogin = view.findViewById(R.id.btnLogin)
         btnLogin.setOnClickListener{
+            ShowUsersToast(view.context)
             Log.i("prijava", "klik")
             etKorime = view.findViewById(R.id.etKorime)
             etLozinka = view.findViewById(R.id.etLozinka)
@@ -53,7 +57,20 @@ class LoginFragment : Fragment() {
             }
 
         }
+
     }
+    fun ShowUsersToast(context: Context)
+    {
+        NetworkService.getUsers(object : VolleyCallback {           //functionality goes inside override onSuccess
+            override fun onSuccess(result: Any) {
+                val users = result as MutableList<User>  //dangerous cast!!! Only do if you know what you are doing(check what type is sent to OnSuccess() function in your specific case)
+                users.forEach{ user ->
+                    Toast.makeText(context,user.username,Toast.LENGTH_LONG).show();     //be careful when using context inside interface override
+                }                                                                                //because keyword this references interface not your current activity
+            }},context)
+    }
+
+
 
 
 }

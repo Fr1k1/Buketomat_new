@@ -12,9 +12,9 @@ import org.json.JSONException
 object NetworkService {
     private const val  baseurl: String = "https://buketomatdb.000webhostapp.com/"                       //server url
 
-    fun getUsers(callback: VolleyCallback,context : Context)                            //callback param is used to await data before doing something with it
+    fun getUsers(callback: UsersSync, context : Context)                            //callback param is used to await data before doing something with it
     {
-        val queue  = Volley.newRequestQueue(context)                                     //this is list of all request - it should probably be global in the future (btw requests can be canceled)
+        val queue  = Volley.newRequestQueue(context)                                    //this is list of all request - it should probably be global in the future (btw requests can be canceled)
         val url = baseurl + "Test.php"
         val users : MutableList<User> = mutableListOf()
         val  jsonRequest = JsonArrayRequest(Request.Method.GET ,url,null,     //defines new request(method,url,success and failure callback functions)
@@ -24,7 +24,7 @@ object NetworkService {
                         val userRaw = response.getJSONObject(i)
                         users.add(User(userRaw))
                     }
-                    callback.onSuccess(users)                                            //tell parent that data is ready
+                    callback.onUsersRecived(users)                                           //tell parent that data is ready
                 }
                 catch (e: JSONException) {
                     e.printStackTrace()

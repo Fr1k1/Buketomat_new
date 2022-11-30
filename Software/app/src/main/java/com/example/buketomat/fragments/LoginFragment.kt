@@ -12,11 +12,11 @@ import android.widget.EditText
 import android.widget.Toast
 import com.example.buketomat.R
 import com.example.buketomat.backgroundworkers.NetworkService
-import com.example.buketomat.backgroundworkers.VolleyCallback
+import com.example.buketomat.backgroundworkers.UsersSync
 import com.example.buketomat.entites.User
 import com.example.buketomat.helpers.MockDataLoader
 
-class LoginFragment : Fragment() {
+class LoginFragment : Fragment() , UsersSync  {     //UsersSync is interface that is used to tell this class when data has been recived
 
     lateinit var btnLogin : Button;
     lateinit var etKorime : EditText;
@@ -61,16 +61,14 @@ class LoginFragment : Fragment() {
     }
     fun ShowUsersToast(context: Context)
     {
-        NetworkService.getUsers(object : VolleyCallback {           //functionality goes inside override onSuccess
-            override fun onSuccess(result: Any) {
-                val users = result as MutableList<User>  //dangerous cast!!! Only do if you know what you are doing(check what type is sent to OnSuccess() function in your specific case)
-                users.forEach{ user ->
-                    Toast.makeText(context,user.username,Toast.LENGTH_LONG).show();     //be careful when using context inside interface override
-                }                                                                                //because keyword this references interface not your current activity
-            }},context)
+        NetworkService.getUsers(this,context)           //you can send keyword this only if current class implements VolleyCallback interface
     }
 
-
+    override fun onUsersRecived(result: MutableList<User>) {
+        result.forEach{ user ->
+            Toast.makeText(context,user.username,Toast.LENGTH_LONG).show();     //be careful when using context inside interface override
+        }
+    }
 
 
 }

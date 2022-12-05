@@ -64,7 +64,7 @@ class LoginFragment : Fragment() , UsersSync  {     //UsersSync is interface tha
         NetworkService.getUsers(this,context)           //you can send keyword this only if current class implements VolleyCallback interface
     }
 
-    override fun onUsersRecived(result: MutableList<User>) {
+    override fun onUsersReceived(result: MutableList<User>) {
         result.forEach{ user ->
             Toast.makeText(context,user.username,Toast.LENGTH_LONG).show();     //be careful when using context inside interface override
         }

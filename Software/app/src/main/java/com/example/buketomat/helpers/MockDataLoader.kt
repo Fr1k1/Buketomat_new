@@ -23,9 +23,9 @@ object MockDataLoader {
     fun getDemoDataOrders() : ArrayList<Order>
     {
         val orders : ArrayList<Order> = arrayListOf()
-        orders.add(Order(752,Date(2022,11,2,9,12,36),258.0,null, getBouquets()))
-        orders.add(Order(12,Date(2019,5,2,1,12,36),158.0,null, getBouquets()))
-        orders.add(Order(287,Date(2002,3,2,9,12,36),20.0,null, getBouquets()))
+        orders.add(Order(752,258.0,null,User("tomic@gmail.com","ttomic","test")))
+        orders.add(Order(12,158.0,null,User("tomic@gmail.com","ttomic","test") ))
+        orders.add(Order(287,20.0,null,User("tomic@gmail.com","ttomic","test") ))
         return orders
 
     }

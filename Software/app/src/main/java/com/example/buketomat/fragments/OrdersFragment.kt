@@ -5,13 +5,17 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.buketomat.R
 import com.example.buketomat.adapters.OrdersAdapter
+import com.example.buketomat.backgroundworkers.NetworkService
+import com.example.buketomat.backgroundworkers.OrdersSync
 import com.example.buketomat.helpers.MockDataLoader
+import com.example.buketomat.models.Order
 
-class Orders : Fragment() {
+class OrdersFragment : Fragment() , OrdersSync {
 
     private  lateinit var rvOrders : RecyclerView
 
@@ -29,17 +33,25 @@ class Orders : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
+        NetworkService.getOrders(1,this,view.context)     // hardcoded for testing purposes
         rvOrders = view.findViewById(R.id.rvOrders)
         val orderAdapter = OrdersAdapter(MockDataLoader.getDemoDataOrders())
         rvOrders.layoutManager = LinearLayoutManager(view.context)
         rvOrders.adapter = orderAdapter
         //LoadOrdersList(view)
+
     }
 
-   /*private fun LoadOrdersList(view : View){
+    override fun onOrdersReceived(result: MutableList<Order>) {
 
-    }*/
+        result.forEach{
+            Toast.makeText(this.context,it.FinalPrice.toString(),Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    /*private fun LoadOrdersList(view : View){
+
+     }*/
 
 
 

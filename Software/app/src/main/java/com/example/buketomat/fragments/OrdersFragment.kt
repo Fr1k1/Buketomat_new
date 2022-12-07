@@ -46,11 +46,11 @@ class OrdersFragment : Fragment() , OrdersSync {
     override fun onResume() {
         super.onResume()
         var activity = activity as MainActivity
-        Log.i("User",activity.user)
-        NetworkService.getOrders(activity.user.toInt(),this,requireContext())
+        Log.i("User",activity.user.id.toString())
+        NetworkService.getOrders(activity.user.id,this,requireContext())
     }
 
-    override fun onOrdersReceived(result: MutableList<Order>) {
+    override fun AddOrdersToList(result: MutableList<Order>) {
             rvOrders = requireView().findViewById(R.id.rvOrders)
             //val orderAdapter = OrdersAdapter(MockDataLoader.getDemoDataOrders())
             val orderAdapter = OrdersAdapter(result as ArrayList<Order>)

@@ -52,7 +52,7 @@ class LoginFragment : Fragment() , UsersSync  {     //UsersSync is interface tha
                     Toast.makeText(this.context, "Uspjesno prijavljen!", Toast.LENGTH_SHORT).show()
                     pronaden = true
                     var activity = activity as MainActivity
-                    activity.user = element.id.toString();
+                    activity.user = element;
                 }
 
                 //test

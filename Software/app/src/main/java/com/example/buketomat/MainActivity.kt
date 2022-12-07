@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.viewpager2.widget.ViewPager2
 import com.example.buketomat.adapters.MainPageAdapter
+import com.example.buketomat.entites.User
 import com.example.buketomat.fragments.LoginFragment
 import com.example.buketomat.fragments.RegistrationFragment
 import com.example.buketomat.fragments.OrdersFragment
@@ -14,7 +15,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var tabLayout: TabLayout
     private lateinit var viewPager: ViewPager2
-    lateinit  var user : String
+    lateinit  var user : User
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)

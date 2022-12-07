@@ -38,11 +38,12 @@ object NetworkService {
     }
 
 
-    fun getOrders(korisnikId : Int ,callback: OrdersSync, context : Context)                            //callback param is used to await data before doing something with it
+    fun getOrders(korisnikId : Int ,callback: OrdersSync, context : Context)            //callback param is used to await data before doing something with it
     {
         val queue  = Volley.newRequestQueue(context)                                    //this is list of all request - it should probably be global in the future (btw requests can be canceled)
         val url = baseurl + "GetOrders.php"
         val orders : MutableList<Order> = mutableListOf()
+
         val jsonUser = JSONObject().put("korisnik_id",korisnikId)
         val requestBody  = JSONArray().put(jsonUser)
         Log.d("JSON", requestBody.toString())

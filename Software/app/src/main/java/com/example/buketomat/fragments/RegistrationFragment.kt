@@ -47,6 +47,7 @@ class RegistrationFragment : Fragment() {
         gumb.setOnClickListener {
 
             var korisnik = User(
+                -1,
                 username = korime.text.toString(),
                 password = lozinka.text.toString(),
                 email = Mail.text.toString()

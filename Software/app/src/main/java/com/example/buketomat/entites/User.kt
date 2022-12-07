@@ -3,12 +3,15 @@ package com.example.buketomat.entites
 import org.json.JSONObject
 
 class User{
+    val id : Int
     val email: String
     val username: String
     val password: String
 
-    constructor(email : String , username : String , password : String)
+    constructor(id : Int, email : String , username : String , password : String)
     {
+
+        this.id = id
         this.email = email
         this.username = username
         this.password = password
@@ -17,6 +20,7 @@ class User{
 
     constructor(data : JSONObject)
     {
+        this.id = data.getInt("id")
         email = data.getString("email")
         username = data.getString("korime")
         password = data.getString("lozinka")

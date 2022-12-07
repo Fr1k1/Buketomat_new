@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import com.example.buketomat.MainActivity
 import com.example.buketomat.R
 import com.example.buketomat.backgroundworkers.NetworkService
 import com.example.buketomat.backgroundworkers.UsersSync
@@ -50,7 +51,11 @@ class LoginFragment : Fragment() , UsersSync  {     //UsersSync is interface tha
                 if (element.username == etKorime.text.toString() && element.password == etLozinka.text.toString()){
                     Toast.makeText(this.context, "Uspjesno prijavljen!", Toast.LENGTH_SHORT).show()
                     pronaden = true
+                    var activity = activity as MainActivity
+                    activity.user = element.id.toString();
                 }
+
+                //test
             }
             if(pronaden == false){
                 Toast.makeText(this.context, "Neuspjesna prijava!", Toast.LENGTH_SHORT).show()

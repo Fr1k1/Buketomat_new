@@ -9,9 +9,9 @@ import java.util.Date
 
 object MockDataLoader {
 
-    var list : MutableList<User> = mutableListOf(User("mmarkic1@gmail.com", "mmarkic", "1234"),
-        User("iivic1@gmail.com", "iivic", "5678"),
-        User("ggabric1@gmail.com", "ggabric", "1111"))
+    var list : MutableList<User> = mutableListOf(User(1,"mmarkic1@gmail.com", "mmarkic", "1234"),
+        User(2,"iivic1@gmail.com", "iivic", "5678"),
+        User(3,"ggabric1@gmail.com", "ggabric", "1111"))
 
     fun getDemoDataUsers(): MutableList<User> = list
 
@@ -23,9 +23,9 @@ object MockDataLoader {
     fun getDemoDataOrders() : ArrayList<Order>
     {
         val orders : ArrayList<Order> = arrayListOf()
-        orders.add(Order(752,258.0,null,User("tomic@gmail.com","ttomic","test")))
-        orders.add(Order(12,158.0,null,User("tomic@gmail.com","ttomic","test") ))
-        orders.add(Order(287,20.0,null,User("tomic@gmail.com","ttomic","test") ))
+        orders.add(Order(752,258.0,null,User(1,"tomic@gmail.com","ttomic","test")))
+        orders.add(Order(12,158.0,null,User(2,"tomic@gmail.com","ttomic","test") ))
+        orders.add(Order(287,20.0,null,User(3,"tomic@gmail.com","ttomic","test") ))
         return orders
 
     }

@@ -1,6 +1,7 @@
 package com.example.buketomat.fragments
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.buketomat.MainActivity
 import com.example.buketomat.R
 import com.example.buketomat.adapters.OrdersAdapter
 import com.example.buketomat.backgroundworkers.NetworkService
@@ -16,6 +18,8 @@ import com.example.buketomat.helpers.MockDataLoader
 import com.example.buketomat.models.Order
 
 class OrdersFragment : Fragment() , OrdersSync {
+
+
 
     private  lateinit var rvOrders : RecyclerView
 
@@ -33,20 +37,25 @@ class OrdersFragment : Fragment() , OrdersSync {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        NetworkService.getOrders(1,this,view.context)     // hardcoded for testing purposes
-        rvOrders = view.findViewById(R.id.rvOrders)
-        val orderAdapter = OrdersAdapter(MockDataLoader.getDemoDataOrders())
-        rvOrders.layoutManager = LinearLayoutManager(view.context)
-        rvOrders.adapter = orderAdapter
+            // hardcoded for testing purposes
+
         //LoadOrdersList(view)
 
     }
 
-    override fun onOrdersReceived(result: MutableList<Order>) {
+    override fun onResume() {
+        super.onResume()
+        var activity = activity as MainActivity
+        Log.i("User",activity.user)
+        NetworkService.getOrders(activity.user.toInt(),this,requireContext())
+    }
 
-        result.forEach{
-            Toast.makeText(this.context,it.FinalPrice.toString(),Toast.LENGTH_SHORT).show()
-        }
+    override fun onOrdersReceived(result: MutableList<Order>) {
+            rvOrders = requireView().findViewById(R.id.rvOrders)
+            //val orderAdapter = OrdersAdapter(MockDataLoader.getDemoDataOrders())
+            val orderAdapter = OrdersAdapter(result as ArrayList<Order>)
+            rvOrders.layoutManager = LinearLayoutManager(requireView().context)
+            rvOrders.adapter = orderAdapter
     }
 
     /*private fun LoadOrdersList(view : View){

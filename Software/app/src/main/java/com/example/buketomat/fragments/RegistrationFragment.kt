@@ -68,7 +68,7 @@ class RegistrationFragment : Fragment(), UsersSync {
             if (isValidEmail(Mail.text.toString())) {
 
                 NetworkService.addUser(korisnik, this, requireContext())
-                Toast.makeText(context, "Registracija uspijesna", Toast.LENGTH_LONG).show()
+                Toast.makeText(context, "Registracija uspjesna", Toast.LENGTH_LONG).show()
             } else {
 
                 Toast.makeText(context, "Krivi mail", Toast.LENGTH_LONG).show()
@@ -82,7 +82,7 @@ class RegistrationFragment : Fragment(), UsersSync {
 
 
     override fun onUsersReceived(result: MutableList<User>) {
-        Toast.makeText(context, "Registracija uspijesna", Toast.LENGTH_LONG).show()
+        Toast.makeText(context, "Registracija uspjesna", Toast.LENGTH_LONG).show()
     }
 
     fun isValidEmail(email: String): Boolean {

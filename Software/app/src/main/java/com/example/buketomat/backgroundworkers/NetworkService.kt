@@ -102,18 +102,12 @@ object NetworkService {
         val requestBody = JSONArray().put(jsonUser)
         Log.d("JSON", requestBody.toString())
 
-        val jsonRequest = JsonArrayRequest(Request.Method.POST, url, requestBody,
+        val jsonRequest = JsonArrayRequest(Request.Method.POST, url, requestBody, //kasnije se moze dodati provjera dal je success
+            //baza vraca duplicate entry za npr. unique mail..searcha se json objekt po error ili success....to stignem kasnije
+
             { response ->
                 Log.d("API", response.toString())
-                try {                                                                   //try-catch is here to prevent crashes caused by wrong data format
-                    for (i in 0 until response.length()) {
-                        val orderRaw = response.getJSONObject(i)
-                        users.add(User(orderRaw))
-                    }
-                    callback.onUsersReceived(users)                                           //tell parent that data is ready
-                } catch (e: JSONException) {
-                    e.printStackTrace()
-                }
+
             },
             { error ->
                 Log.d("API", "Something went wrong while establishing connection to server")

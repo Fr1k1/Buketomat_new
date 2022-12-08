@@ -17,29 +17,40 @@ object NetworkService {
         "https://buketomatdb.000webhostapp.com/"                       //server url
 
     fun getUsers(
+        korisnikKorime : String,
+        korisnikLozinka : String,
         callback: UsersSync,
         context: Context
     )                            //callback param is used to await data before doing something with it
     {
         val queue =
             Volley.newRequestQueue(context)                                    //this is list of all request - it should probably be global in the future (btw requests can be canceled)
-        val url = baseurl + "Test.php"
+        val url = baseurl + "GetUser.php"
         val users: MutableList<User> = mutableListOf()
-        val jsonRequest = JsonArrayRequest(Request.Method.GET,
+        val jsonUser = JSONObject()
+        jsonUser.put("korime", korisnikKorime)
+        jsonUser.put("lozinka", korisnikLozinka)
+
+        val requestBody = JSONArray().put(jsonUser)
+
+        Log.d("JSON", requestBody.toString())
+
+        val jsonRequest = JsonArrayRequest(Request.Method.POST,
             url,
-            null,     //defines new request(method,url,success and failure callback functions)
-            { response ->
+            requestBody,     //defines new request(method,url,success and failure callback functions)
+            {
+                    response ->Log.d("API", response.toString())
                 try {                                                                   //try-catch is here to prevent crashes caused by wrong data format
                     for (i in 0 until response.length()) {
-                        val userRaw = response.getJSONObject(i)
-                        users.add(User(userRaw))
+                        val orderRaw = response.getJSONObject(i)
+                        users.add(User(orderRaw))
                     }
                     callback.onUsersReceived(users)                                           //tell parent that data is ready
                 } catch (e: JSONException) {
                     e.printStackTrace()
                 }
             },
-            { Log.d("API", "Something went wrong while establishing connection to server") })
+            {  error -> Log.d("API", "Something went wrong while establishing connection to server") })
         queue.add(jsonRequest)
     }
 

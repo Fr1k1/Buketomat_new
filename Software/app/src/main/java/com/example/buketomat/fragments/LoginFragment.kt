@@ -33,7 +33,16 @@ class LoginFragment : Fragment() , UsersSync  {     //UsersSync is interface tha
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         btnLogin = view.findViewById(R.id.btnLogin)
+        etKorime = view.findViewById(R.id.etKorime)
+        etLozinka = view.findViewById(R.id.etLozinka)
+
         btnLogin.setOnClickListener{
+
+            val rezultat = NetworkService.getUsers(etKorime.text.toString(),etLozinka.text.toString(),this, requireContext())
+            Toast.makeText(context, "uspjesna prijava ", Toast.LENGTH_SHORT).show()
+            //if (etKorime.text.toString()==)
+
+        /*
             ShowUsersToast(view.context)
             Log.i("prijava", "klik")
             etKorime = view.findViewById(R.id.etKorime)
@@ -60,19 +69,19 @@ class LoginFragment : Fragment() , UsersSync  {     //UsersSync is interface tha
             if(pronaden == false){
                 Toast.makeText(this.context, "Neuspjesna prijava!", Toast.LENGTH_SHORT).show()
             }
-
+*/
         }
 
     }
     fun ShowUsersToast(context: Context)
     {
-        NetworkService.getUsers(this,context)           //you can send keyword this only if current class implements VolleyCallback interface
+        //NetworkService.getUsers(this,context)           //you can send keyword this only if current class implements VolleyCallback interface
     }
 
     override fun onUsersReceived(result: MutableList<User>) {
-        result.forEach{ user ->
-            Toast.makeText(context,user.username,Toast.LENGTH_LONG).show();     //be careful when using context inside interface override
-        }
+       // result.forEach{ user ->
+            //Toast.makeText(context,user.username,Toast.LENGTH_LONG).show();     //be careful when using context inside interface override
+       // }
     }
 
 

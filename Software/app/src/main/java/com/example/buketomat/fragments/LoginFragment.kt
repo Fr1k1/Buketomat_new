@@ -39,37 +39,9 @@ class LoginFragment : Fragment() , UsersSync  {     //UsersSync is interface tha
         btnLogin.setOnClickListener{
 
             val rezultat = NetworkService.getUsers(etKorime.text.toString(),etLozinka.text.toString(),this, requireContext())
-            Toast.makeText(context, "uspjesna prijava ", Toast.LENGTH_SHORT).show()
+
             //if (etKorime.text.toString()==)
 
-        /*
-            ShowUsersToast(view.context)
-            Log.i("prijava", "klik")
-            etKorime = view.findViewById(R.id.etKorime)
-            etLozinka = view.findViewById(R.id.etLozinka)
-            Log.i("podaci", etKorime.text.toString() + " --- " + etLozinka.text.toString())
-
-            var pronaden = false;
-            var list = MockDataLoader.getDemoDataUsers()
-
-            for(element in list) {
-                Log.i("korisnik", element.toString())
-                println(list)
-            }
-            for (element in list){
-                if (element.username == etKorime.text.toString() && element.password == etLozinka.text.toString()){
-                    Toast.makeText(this.context, "Uspjesno prijavljen!", Toast.LENGTH_SHORT).show()
-                    pronaden = true
-                    var activity = activity as MainActivity
-                    activity.user = element;
-                }
-
-                //test
-            }
-            if(pronaden == false){
-                Toast.makeText(this.context, "Neuspjesna prijava!", Toast.LENGTH_SHORT).show()
-            }
-*/
         }
 
     }
@@ -79,9 +51,11 @@ class LoginFragment : Fragment() , UsersSync  {     //UsersSync is interface tha
     }
 
     override fun onUsersReceived(result: MutableList<User>) {
-       // result.forEach{ user ->
-            //Toast.makeText(context,user.username,Toast.LENGTH_LONG).show();     //be careful when using context inside interface override
-       // }
+        if(result.size > 0){
+            Toast.makeText(context, "uspjesna prijava ", Toast.LENGTH_SHORT).show()
+        }else{
+            Toast.makeText(context, "neuspjesna prijava ", Toast.LENGTH_SHORT).show()
+        }
     }
 
 

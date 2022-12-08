@@ -45,12 +45,17 @@ object NetworkService {
                         val orderRaw = response.getJSONObject(i)
                         users.add(User(orderRaw))
                     }
-                    callback.onUsersReceived(users)                                           //tell parent that data is ready
+                                                             //tell parent that data is ready
                 } catch (e: JSONException) {
                     e.printStackTrace()
+                } finally {
+                    callback.onUsersReceived(users)
                 }
             },
-            {  error -> Log.d("API", "Something went wrong while establishing connection to server") })
+            {  error -> Log.d("API", "Something went wrong while establishing connection to server")
+                Log.e("Volly Error", error.toString()); // javlja detalje errora kaj ne valja
+            })
+
         queue.add(jsonRequest)
     }
 

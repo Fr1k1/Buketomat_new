@@ -7,11 +7,17 @@ class User{
     val email: String
     val username: String
     val password: String
+    val name: String
+    val surname: String
+    val address: String
 
-    constructor(id : Int, email : String , username : String , password : String)
+    constructor(id : Int, name:String, surname:String, address:String, email : String , username : String , password : String)
     {
 
         this.id = id
+        this.name=name
+        this.surname=surname
+        this.address=address
         this.email = email
         this.username = username
         this.password = password
@@ -21,6 +27,9 @@ class User{
     constructor(data : JSONObject)
     {
         this.id = data.getInt("id")
+        name=data.getString("ime")
+        surname=data.getString("prezime")
+        address=data.getString("adresa")
         email = data.getString("email")
         username = data.getString("korime")
         password = data.getString("lozinka")

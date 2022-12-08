@@ -69,5 +69,44 @@ object NetworkService {
         queue.add(jsonRequest)
     }
 
+    fun addUser(korisnik:User ,callback: UsersSync, context : Context)            //callback param is used to await data before doing something with it
+    {
+        val queue  = Volley.newRequestQueue(context)                                    //this is list of all request - it should probably be global in the future (btw requests can be canceled)
+        val url = baseurl + "InsertUser.php"
+        val users : MutableList<User> = mutableListOf()
+
+        val jsonUser = JSONObject()
+        jsonUser.put("ime",korisnik.name)
+        jsonUser.put("prezime",korisnik.surname)
+        jsonUser.put("email",korisnik.email)
+        jsonUser.put("lozinka",korisnik.password)
+        jsonUser.put("adresa",korisnik.address)
+        jsonUser.put("korime",korisnik.username)
+
+
+        val requestBody  = JSONArray().put(jsonUser)
+        Log.d("JSON", requestBody.toString())
+
+        val  jsonRequest = JsonArrayRequest(Request.Method.POST ,url,requestBody,
+            { response ->
+                Log.d("API", response.toString())
+                try {                                                                   //try-catch is here to prevent crashes caused by wrong data format
+                    for (i in 0 until response.length()) {
+                        val orderRaw = response.getJSONObject(i)
+                        users.add(User(orderRaw))
+                    }
+                    callback.onUsersReceived(users)                                           //tell parent that data is ready
+                }
+                catch (e: JSONException) {
+                    e.printStackTrace()
+                }
+            },
+            {   error ->
+                Log.d("API", "Something went wrong while establishing connection to server")
+                Log.e("Volly Error", error.toString());
+            })
+        queue.add(jsonRequest)
+    }
+
 
 }

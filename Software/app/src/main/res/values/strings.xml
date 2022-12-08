@@ -13,4 +13,6 @@
     <string name="registracija">REGISTRACIJA:</string>
     <string name="korime">korime</string>
     <string name="login">Login</string>
+    <string name="prezime">prezime</string>
+    <string name="adresa">adresa</string>
 </resources>

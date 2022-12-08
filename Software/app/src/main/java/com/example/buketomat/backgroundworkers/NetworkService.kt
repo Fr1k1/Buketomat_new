@@ -83,9 +83,11 @@ object NetworkService {
                         val orderRaw = response.getJSONObject(i)
                         orders.add(Order(orderRaw))
                     }
-                    callback.AddOrdersToList(orders)                                           //tell parent that data is ready
                 } catch (e: JSONException) {
                     e.printStackTrace()
+                }finally {
+                    callback.AddOrdersToList(orders)                                           //tell parent that data is ready
+
                 }
             },
             { error ->

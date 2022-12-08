@@ -52,10 +52,13 @@ class LoginFragment : Fragment() , UsersSync  {     //UsersSync is interface tha
 
     override fun onUsersReceived(result: MutableList<User>) {
         if(result.size > 0){
+            val activity = activity as MainActivity
+            activity.user = result[0]
             Toast.makeText(context, "uspjesna prijava ", Toast.LENGTH_SHORT).show()
         }else{
             Toast.makeText(context, "neuspjesna prijava ", Toast.LENGTH_SHORT).show()
         }
+
     }
 
 

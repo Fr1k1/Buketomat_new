@@ -6,6 +6,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="registration">Registration</string>
+    <string name="mail_fragment">Slanje maila</string>
     <string name="ime">Ime</string>
     <string name="email">Email</string>
     <string name="lozinka">Lozinka</string>
@@ -15,4 +16,9 @@
     <string name="login">Login</string>
     <string name="prezime">prezime</string>
     <string name="adresa">adresa</string>
+    <string name="primatelj">Primatelj:</string>
+    <string name="predmet">Predmet</string>
+    <string name="sadrzaj_poruke">Sadrzaj poruke</string>
+    <string name="posalji">Posalji</string>
+    <string name="unesite_mail">Unesite mail</string>
 </resources>

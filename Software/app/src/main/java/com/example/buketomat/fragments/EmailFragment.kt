@@ -1,6 +1,7 @@
 package com.example.buketomat.fragments
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -8,7 +9,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
+import android.widget.Toast.LENGTH_SHORT
 import com.example.buketomat.R
+
 
 
 class EmailFragment : Fragment() {
@@ -43,8 +47,9 @@ class EmailFragment : Fragment() {
         buttonSend.setOnClickListener {
             getData()
             val intent = Intent(Intent.ACTION_SEND)
+           // intent.data= Uri.parse("mailto:")
 
-            intent.putExtra(Intent.EXTRA_EMAIL, email)
+            intent.putExtra(Intent.EXTRA_EMAIL,  arrayOf(email))
             intent.putExtra(Intent.EXTRA_SUBJECT, subject)
             intent.putExtra(Intent.EXTRA_TEXT, message)
             intent.type = "message/rfc822"

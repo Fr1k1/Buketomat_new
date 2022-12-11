@@ -21,4 +21,5 @@
     <string name="sadrzaj_poruke">Sadrzaj poruke</string>
     <string name="posalji">Posalji</string>
     <string name="unesite_mail">Unesite mail</string>
+    <string name="finished_bouquets_fragment">Finished bouquets</string>
 </resources>

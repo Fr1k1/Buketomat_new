@@ -6,6 +6,7 @@ import com.android.volley.Request
 import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.Volley
 import com.example.buketomat.entites.User
+import com.example.buketomat.models.Bouquet
 import com.example.buketomat.models.Order
 import org.json.JSONArray
 import org.json.JSONException
@@ -126,6 +127,45 @@ object NetworkService {
             { response ->
                 Log.d("API", response.toString())
 
+            },
+            { error ->
+                Log.d("API", "Something went wrong while establishing connection to server")
+                Log.e("Volly Error", error.toString());
+            })
+        queue.add(jsonRequest)
+    }
+
+
+
+    fun getBouquets(
+
+        callback: BouquetsSync,
+        context: Context
+    )            //callback param is used to await data before doing something with it
+    {
+        val queue =
+            Volley.newRequestQueue(context)                                    //this is list of all request - it should probably be global in the future (btw requests can be canceled)
+        val url = baseurl + "GetBouquets.php"
+        val bouquets: MutableList<Bouquet> = mutableListOf()
+
+       /* val jsonUser = JSONObject().put("korisnik_id", korisnikId)
+        val requestBody = JSONArray().put(jsonUser)
+        Log.d("JSON", requestBody.toString())*/
+
+        val jsonRequest = JsonArrayRequest(Request.Method.GET, url, null,
+            { response ->
+                Log.d("API", response.toString())
+                try {                                                                   //try-catch is here to prevent crashes caused by wrong data format
+                    for (i in 0 until response.length()) {
+                        val bouquetRaw = response.getJSONObject(i)
+                        bouquets.add(Bouquet(bouquetRaw))
+                    }
+                } catch (e: JSONException) {
+                    e.printStackTrace()
+                }finally {
+                    callback.AddBouquetsToList(bouquets)                                           //tell parent that data is ready
+
+                }
             },
             { error ->
                 Log.d("API", "Something went wrong while establishing connection to server")

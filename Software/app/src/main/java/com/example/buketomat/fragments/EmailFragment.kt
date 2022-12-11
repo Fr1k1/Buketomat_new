@@ -14,42 +14,37 @@ import android.widget.Toast.LENGTH_SHORT
 import com.example.buketomat.R
 
 
-
 class EmailFragment : Fragment() {
 
-    lateinit var editTextMail: EditText
+
     lateinit var editTextSubject: EditText
     lateinit var editTextMessage: EditText
     lateinit var buttonSend: Button
-    lateinit var email: String
     lateinit var subject: String
     lateinit var message: String
-
-
-
 
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
+
         return inflater.inflate(R.layout.fragment_email, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
 
-        editTextMail = view.findViewById(R.id.editTextMail)
         editTextSubject = view.findViewById(R.id.editTextSubject)
         editTextMessage = view.findViewById(R.id.editTextMessage)
         buttonSend = view.findViewById(R.id.buttonSend)
         buttonSend.setOnClickListener {
             getData()
             val intent = Intent(Intent.ACTION_SEND)
-           // intent.data= Uri.parse("mailto:")
+            // intent.data= Uri.parse("mailto:")
 
-            intent.putExtra(Intent.EXTRA_EMAIL,  arrayOf(email))
+            intent.putExtra(Intent.EXTRA_EMAIL, arrayOf("buketomat@gmail.com"))
+
             intent.putExtra(Intent.EXTRA_SUBJECT, subject)
             intent.putExtra(Intent.EXTRA_TEXT, message)
             intent.type = "message/rfc822"
@@ -58,7 +53,7 @@ class EmailFragment : Fragment() {
     }
 
     private fun getData() {
-        email = editTextMail.text.toString()
+
         subject = editTextSubject.text.toString()
         message = editTextMessage.text.toString()
     }

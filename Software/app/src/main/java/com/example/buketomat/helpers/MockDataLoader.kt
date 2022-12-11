@@ -29,7 +29,7 @@ object MockDataLoader {
 
     }
 
-    fun getBouquets() : ArrayList<Bouquet>
+    /*fun getBouquets() : ArrayList<Bouquet>
     {
         val bouquets : ArrayList<Bouquet>  = arrayListOf()
         bouquets.add(Bouquet(11,"Ruže za valentinovo","Predivan buket ruža za vaše najmilije",
@@ -37,7 +37,7 @@ object MockDataLoader {
         bouquets.add(Bouquet(15,"Suncoketi","Predivan buket suncokreta koji ce vam ravedriti dan",
             getFlowers(),15.00))
         return bouquets
-    }
+    }*/
 
     fun getFlowers() : ArrayList<Flower> {
         val colors : ArrayList<String>  = arrayListOf()

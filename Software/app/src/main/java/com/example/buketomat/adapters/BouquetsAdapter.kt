@@ -20,17 +20,16 @@ class BouquetsAdapter(private val bouquetsList: ArrayList<Bouquet>) :
         private val bouquetName: TextView
         private val bouquetDescription: TextView
         private val bouquetPrice: TextView
-        private var bouquetImage:ImageView
+        private var bouquetImage: ImageView
 
 
         init {
             bouquetName = view.findViewById(R.id.tv_bouquetName)
             bouquetDescription = view.findViewById(R.id.tv_bouquetDescription)
             bouquetPrice = view.findViewById(R.id.tv_bouquetPrice)
-            bouquetImage=view.findViewById(R.id.image_view)
+            bouquetImage = view.findViewById(R.id.image_view)
 
         }
-
 
 
         fun bind(bouquet: Bouquet) {
@@ -38,7 +37,7 @@ class BouquetsAdapter(private val bouquetsList: ArrayList<Bouquet>) :
 
             bouquetName.text = bouquet.Name.toString()
             bouquetDescription.text = bouquet.Description.toString()
-            bouquetPrice.text =  bouquet.Price.toString()
+            bouquetPrice.text = bouquet.Price.toString() + " EUR"
             //bouquet.Picture="https://images.pexels.com/photos/56866/garden-rose-red-pink-56866.jpeg?cs=srgb&dl=pexels-pixabay-56866.jpg&fm=jpg"
 
             Picasso.with(bouquetImage.context).load(bouquet.Picture).into(bouquetImage)

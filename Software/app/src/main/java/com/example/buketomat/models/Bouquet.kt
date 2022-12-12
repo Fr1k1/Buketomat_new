@@ -9,7 +9,7 @@ class Bouquet {
     var Description: String
     lateinit var Flowers: ArrayList<Flower>
     var Price: Double
-    //var Picture:String
+    var Picture: String
 
     constructor(
         Id: Int,
@@ -17,14 +17,14 @@ class Bouquet {
         Description: String,
         Flowers: ArrayList<Flower>,
         Price: Double,
-        //Picture:String
+        Picture: String
     ) {
         this.Id = Id
         this.Name = Name
         this.Description = Description
         this.Price = Price
         this.Flowers = Flowers
-        //this.Picture=Picture
+        this.Picture = Picture
     }
 
     constructor(data: JSONObject) {
@@ -32,7 +32,7 @@ class Bouquet {
         Name = data.getString("naziv")
         Description = data.getString("opis")
         Price = data.getDouble("cijena")
-        //Picture=data.getString("slika")
+        Picture = data.getString("slika")
         //Flowers=data.getString("cvjetovi")
     }
 }

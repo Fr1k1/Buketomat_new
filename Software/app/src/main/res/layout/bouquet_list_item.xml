@@ -12,7 +12,7 @@
         android:layout_height="307dp">
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="274dp"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="10dp">
@@ -32,7 +32,7 @@
 
             <ImageView
                 android:id="@+id/image_view"
-                android:layout_width="fill_parent"
+                android:layout_width="167dp"
                 android:layout_height="224dp"
                 android:layout_marginTop="16dp" />
         </LinearLayout>

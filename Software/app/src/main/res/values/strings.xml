@@ -22,4 +22,5 @@
     <string name="posalji">Posalji</string>
     <string name="unesite_mail">Unesite mail</string>
     <string name="finished_bouquets_fragment">Finished bouquets</string>
+    <string name="new_order">Novi buket</string>
 </resources>

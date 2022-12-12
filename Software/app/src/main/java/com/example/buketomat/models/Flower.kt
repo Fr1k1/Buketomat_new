@@ -1,11 +1,27 @@
 package com.example.buketomat.models
 
-data class Flower(
+import com.example.buketomat.entites.User
+import org.json.JSONObject
+import java.util.*
+import kotlin.collections.ArrayList
 
-    val Id : Int,
-    val Name : String,
-    val Colors : ArrayList<String>, //maybe create class color later
-    var Picture : String,
-    var Price : Double
+class Flower {
 
-)
+    val Id: Int
+    val Name: String
+    var Price: Double
+    // val Colors: ArrayList<String>
+    // var Picture: String
+
+    constructor (Id: Int, Name: String, Price: Double) {
+        this.Id = Id
+        this.Name = Name
+        this.Price = Price
+    }
+
+    constructor(data: JSONObject) {
+        Id = data.getInt("id")
+        Name = data.getString("naziv")
+        Price = data.getDouble("cijena")
+    }
+}

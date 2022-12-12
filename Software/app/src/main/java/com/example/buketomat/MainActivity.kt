@@ -34,6 +34,8 @@ class MainActivity : AppCompatActivity() {
         mainPageAdapter.AddFragment(MainPageAdapter.FragmentItem(R.string.mail_fragment,R.drawable.ic_baseline_shopping_bag_24,EmailFragment::class))
         mainPageAdapter.AddFragment(MainPageAdapter.FragmentItem(R.string.finished_bouquets_fragment,R.drawable.ic_baseline_shopping_bag_24,FinishedBouquetsFragment::class))
         mainPageAdapter.AddFragment(MainPageAdapter.FragmentItem(R.string.orders,R.drawable.ic_baseline_shopping_bag_24,OrdersFragment::class))
+        mainPageAdapter.AddFragment(MainPageAdapter.FragmentItem(R.string.new_order,R.drawable.ic_baseline_add_24,NewBouquetFragment::class))
+
 
         viewPager.adapter = mainPageAdapter
 

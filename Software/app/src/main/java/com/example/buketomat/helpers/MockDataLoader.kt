@@ -38,7 +38,7 @@ object MockDataLoader {
             getFlowers(),15.00))
         return bouquets
     }*/
-
+/*
     fun getFlowers() : ArrayList<Flower> {
         val colors : ArrayList<String>  = arrayListOf()
         colors.add("red")
@@ -48,5 +48,5 @@ object MockDataLoader {
         flowers.add(Flower(2,"Žuta crvena",colors,"",5.00))
         return  flowers;
 
-    }
+    }*/
 }

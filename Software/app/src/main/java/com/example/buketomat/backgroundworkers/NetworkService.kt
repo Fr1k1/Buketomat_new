@@ -7,6 +7,7 @@ import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.Volley
 import com.example.buketomat.entites.User
 import com.example.buketomat.models.Bouquet
+import com.example.buketomat.models.Flower
 import com.example.buketomat.models.Order
 import org.json.JSONArray
 import org.json.JSONException
@@ -136,9 +137,35 @@ object NetworkService {
     }
 
 
+    fun getFlowers(callback: FlowersSync, context: Context)
+    {
+        val queue =
+            Volley.newRequestQueue(context)
+        val url = baseurl + "GetFlowers.php"
+        val flowers: MutableList<Flower> = mutableListOf()
+
+        val jsonRequest = JsonArrayRequest(Request.Method.GET, url, null,
+            { response ->
+                Log.d("API", response.toString())
+                try {
+                    for (i in 0 until response.length()) {
+                        val flowerRaw = response.getJSONObject(i)
+                        flowers.add(Flower(flowerRaw))
+                    }
+                } catch (e: JSONException) {
+                    e.printStackTrace()
+                }finally {
+                    callback.AddFlowersToList(flowers)
+                }
+            },
+            { error ->
+                Log.d("API", "Something went wrong while establishing connection to server")
+                Log.e("Volly Error", error.toString());
+            })
+        queue.add(jsonRequest)
+    }
 
     fun getBouquets(
-
         callback: BouquetsSync,
         context: Context
     )            //callback param is used to await data before doing something with it

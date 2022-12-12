@@ -10,10 +10,11 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="#FAE4EE"
         android:orientation="horizontal">
 
         <LinearLayout
-            android:layout_width="302dp"
+            android:layout_width="261dp"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="10dp">
@@ -38,12 +39,14 @@
             android:layout_height="match_parent">
 
             <EditText
-                android:id="@+id/editTextNumberSigned2"
-                android:layout_width="104dp"
-                android:layout_height="65dp"
+                android:id="@+id/etKolicina"
+                android:layout_width="145dp"
+                android:layout_height="60dp"
                 android:ems="10"
+                android:gravity="center"
                 android:inputType="numberSigned"
                 android:text="0"
+                android:textAlignment="center"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

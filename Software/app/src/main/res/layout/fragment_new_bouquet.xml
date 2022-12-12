@@ -5,6 +5,7 @@
     android:id="@+id/constraintLayout2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#F4CFE0"
     tools:context=".fragments.NewBouquetFragment">
 
     <!-- TODO: Update blank fragment layout -->
@@ -13,29 +14,52 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="148dp"
-        android:layout_marginTop="220dp"
-        android:text="@string/hello_blank_fragment"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/button"
-        android:layout_width="134dp"
-        android:layout_height="79dp"
-        android:text="Button"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="12dp"
+        android:text="Napravi svoj buket:"
+        app:layout_constraintBottom_toTopOf="@+id/btnDodajAutomatski"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.106"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.154" />
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/btnDodajAutomatski"
+        android:layout_width="349dp"
+        android:layout_height="83dp"
+        android:text="Dodaj automatski buket"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.072" />
+
+    <Button
+        android:id="@+id/btnNapraviBuket"
+        android:layout_width="348dp"
+        android:layout_height="81dp"
+        android:layout_marginTop="28dp"
+        android:text="Napravi buket"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rvFlowers"
+        app:layout_constraintVertical_bias="0.0" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvFlowers"
-        android:layout_width="409dp"
-        android:layout_height="490dp"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="240dp" />
+        android:layout_width="355dp"
+        android:layout_height="281dp"
+        android:layout_marginTop="19dp"
+        android:layout_marginBottom="192dp"
+        android:background="#AB667F"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.553"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnDodajAutomatski"
+        app:layout_constraintVertical_bias="0.293" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

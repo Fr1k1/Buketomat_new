@@ -6,6 +6,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.buketomat.MainActivity
@@ -20,6 +23,8 @@ import com.example.buketomat.models.Order
 class NewBouquetFragment : Fragment(), FlowersSync {
 
     private lateinit var rvFlowers : RecyclerView
+    lateinit var btnDodajAutomatski : Button
+    lateinit var btnNapraviBuket : Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,7 +38,31 @@ class NewBouquetFragment : Fragment(), FlowersSync {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        // za poslije
+        btnDodajAutomatski = view.findViewById(R.id.btnDodajAutomatski)
+        btnNapraviBuket = view.findViewById(R.id.btnNapraviBuket)
+
+        btnDodajAutomatski.setOnClickListener{
+            val randomBroj = (0..10).random()
+            Toast.makeText(context, "Random buket ID: " + randomBroj, Toast.LENGTH_LONG).show()
+            // TODO smisli kak bu se ovo
+        }
+
+        btnNapraviBuket.setOnClickListener {
+            val itemCount = rvFlowers.adapter?.itemCount
+            for (i in 0 until itemCount!!) {
+                val holder = rvFlowers.findViewHolderForAdapterPosition(i)
+                if (holder != null) {
+                    val flowerNameView = holder.itemView.findViewById<View>(R.id.tv_flower_name) as TextView
+                    val flowerPriceView = holder.itemView.findViewById<View>(R.id.tv_flower_price) as TextView
+                    val flowerKolicinaView = holder.itemView.findViewById<View>(R.id.etKolicina) as TextView
+                    val flowerId = i+1
+
+                    if (flowerKolicinaView.text.toString().toInt() > 0 ) {
+                        Toast.makeText(context, "Ime: " + flowerNameView.text.toString() + " id: " + flowerId + " kolicina: " + flowerKolicinaView.text.toString(), Toast.LENGTH_LONG).show()
+                    }
+                }
+            }
+        }
     }
 
     override fun onResume() {

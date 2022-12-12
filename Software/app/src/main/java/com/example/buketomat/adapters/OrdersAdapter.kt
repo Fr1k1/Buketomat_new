@@ -1,5 +1,6 @@
 package com.example.buketomat.adapters
 
+import android.app.AlertDialog
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -26,7 +27,19 @@ class OrdersAdapter(private val ordersList: ArrayList<Order>):RecyclerView.Adapt
             orderDate = view.findViewById(R.id.tv_order_date)
             orderFinalPrice = view.findViewById(R.id.tv_order_final_price)
 
+            view.setOnLongClickListener {
 
+                val orderDetailsDialog = LayoutInflater.from(view.context).inflate(R.layout.order_details_dialog, null)
+                AlertDialog.Builder(view.context)
+                    .setView(orderDetailsDialog)
+                    //.setTitle("Detalji narudžbe")
+                    .show()
+               /* val currentOrder = ordersList[adapterPosition];
+                val alertDialogBuilder = AlertDialog.Builder(view.context)
+                    .setTitle("Naruđžba broj: " + currentOrder.Id)
+                alertDialogBuilder.show()*/
+                return@setOnLongClickListener true
+            }
         }
 
         fun bind(order : Order)

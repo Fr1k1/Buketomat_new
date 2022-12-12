@@ -36,13 +36,13 @@ class BouquetsAdapter(private val bouquetsList: ArrayList<Bouquet>) :
         fun bind(bouquet: Bouquet) {
 
 
-            bouquetName.text = "Naziv" + bouquet.Name.toString()
-            bouquetDescription.text = "Description" + bouquet.Description.toString()
-            bouquetPrice.text = "Price" + bouquet.Price.toString()
+            bouquetName.text = bouquet.Name.toString()
+            bouquetDescription.text = bouquet.Description.toString()
+            bouquetPrice.text =  bouquet.Price.toString()
             //bouquet.Picture="https://images.pexels.com/photos/56866/garden-rose-red-pink-56866.jpeg?cs=srgb&dl=pexels-pixabay-56866.jpg&fm=jpg"
 
             Picasso.with(bouquetImage.context).load(bouquet.Picture).into(bouquetImage)
-                                                    //bouquet.slika tu saljem..mozda treba napraviti jos jedan textview v kojem bu taj link
+
 
         }
 

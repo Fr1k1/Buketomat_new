@@ -9,11 +9,11 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="307dp">
+        android:layout_height="443dp">
 
         <LinearLayout
-            android:layout_width="274dp"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:orientation="vertical"
             android:padding="10dp">
 
@@ -21,6 +21,9 @@
                 android:id="@+id/tv_bouquetName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="20dp"
+                android:gravity="center"
                 android:textSize="20sp"
                 tools:text="Bouquet name" />
 
@@ -32,26 +35,25 @@
 
             <ImageView
                 android:id="@+id/image_view"
-                android:layout_width="167dp"
+                android:layout_width="202dp"
                 android:layout_height="224dp"
-                android:layout_marginTop="16dp" />
-        </LinearLayout>
+                android:layout_gravity="center"
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="20dp" />
 
             <TextView
                 android:id="@+id/tv_bouquetPrice"
                 android:layout_width="97dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="30dp"
+                android:layout_gravity="center"
+                android:layout_margin="15dp"
+                android:layout_marginEnd="88dp"
+                android:gravity="center"
+
                 android:textSize="24sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:text="200KN" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                tools:text="200" />
+        </LinearLayout>
 
 
     </LinearLayout>

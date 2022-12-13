@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.buketomat.R
 import com.example.buketomat.adapters.BouquetsAdapter
+import com.example.buketomat.adapters.OrderBouquetsAdapter
 import com.example.buketomat.backgroundworkers.NetworkService
 import com.example.buketomat.backgroundworkers.OrderBouquetsSync
 import com.example.buketomat.models.Bouquet
@@ -41,10 +42,10 @@ class OrderDetailsDialog : OrderBouquetsSync {
     override fun showOrderItems(result: MutableList<OrderBouquet>) {
         val rvOrderItems : RecyclerView= view.findViewById(R.id.rvOrderDetails_bouquets)
 
-        val bouquetAdapter = BouquetsAdapter(result as ArrayList<Bouquet>)
+        val bouquetAdapter = OrderBouquetsAdapter(result as ArrayList<OrderBouquet>)
         rvOrderItems.layoutManager = LinearLayoutManager(view.context)
         rvOrderItems.adapter = bouquetAdapter
     }
-    
+
 
 }

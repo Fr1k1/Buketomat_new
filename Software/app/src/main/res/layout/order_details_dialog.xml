@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="15dp">
+    android:padding="20dp">
 
     <TextView
         android:id="@+id/tvOrderNum"
@@ -18,18 +18,26 @@
         android:textSize="26sp"/>
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/tv_order_details_order_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="@string/stavke" />
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/datum_narudzbe"/>
+    <TextView
+        android:id="@+id/tv_order_details_deliver_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/datum_dostave"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvOrderDetails_bouquets"
         android:layout_width="wrap_content"
-        android:layout_height="350dp"
-        android:layout_marginTop="50dp"
-        android:layout_gravity="center"/>
+        android:layout_height="306dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="50dp" />
 
     <TextView
         android:id="@+id/tvOrderDetails_price"
@@ -40,6 +48,6 @@
         android:layout_marginBottom="20dp"
         android:text="@string/iznos"
         android:textSize="20sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"/>
 
 </LinearLayout>

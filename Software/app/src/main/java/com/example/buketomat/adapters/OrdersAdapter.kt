@@ -18,7 +18,6 @@ class OrdersAdapter(private val ordersList: ArrayList<Order>):RecyclerView.Adapt
 
     inner class OrderViewHolder(view : View) : RecyclerView.ViewHolder(view)
     {
-        private val sdf: SimpleDateFormat = SimpleDateFormat("dd.MM.yyyy. HH:mm", Locale.ENGLISH)
         private val orderId : TextView
         private val orderDate : TextView
         private val orderFinalPrice : TextView
@@ -34,7 +33,6 @@ class OrdersAdapter(private val ordersList: ArrayList<Order>):RecyclerView.Adapt
                 val orderDetailsDialogView = LayoutInflater.from(view.context).inflate(R.layout.order_details_dialog, null)
                 AlertDialog.Builder(view.context)
                     .setView(orderDetailsDialogView)
-                    //.setTitle("Detalji narudžbe"
                     .setPositiveButton(view.resources.getString(R.string.zatvori)){ _, _ ->
 
                     }
@@ -42,10 +40,9 @@ class OrdersAdapter(private val ordersList: ArrayList<Order>):RecyclerView.Adapt
                 val orderDetailsDialog = OrderDetailsDialog(orderDetailsDialogView,currentOrder)
                 orderDetailsDialog.setOrderNum()
                 orderDetailsDialog.setOrderValue();
-               /* val currentOrder = ordersList[adapterPosition];
-                val alertDialogBuilder = AlertDialog.Builder(view.context)
-                    .setTitle("Naruđžba broj: " + currentOrder.Id)
-                alertDialogBuilder.show()*/
+                orderDetailsDialog.setOrderDate()
+                orderDetailsDialog.setDeliveryDate()
+
                 return@setOnLongClickListener true
             }
         }
@@ -53,8 +50,8 @@ class OrdersAdapter(private val ordersList: ArrayList<Order>):RecyclerView.Adapt
         fun bind(order : Order)
         {
             orderId.text = "Br: " + order.Id.toString()
-            orderDate.text = "Datum: " + sdf.format(order.OrderTime)
-            orderFinalPrice.text =   order.FinalPrice.toString() + "KN"
+            orderDate.text = "Datum: " + order.getOrderDate();
+            orderFinalPrice.text =   order.FinalPrice.toString() + "EUR"
         }
     }
 

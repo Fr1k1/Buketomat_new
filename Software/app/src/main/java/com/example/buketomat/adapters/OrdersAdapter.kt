@@ -34,7 +34,10 @@ class OrdersAdapter(private val ordersList: ArrayList<Order>):RecyclerView.Adapt
                 val orderDetailsDialogView = LayoutInflater.from(view.context).inflate(R.layout.order_details_dialog, null)
                 AlertDialog.Builder(view.context)
                     .setView(orderDetailsDialogView)
-                    //.setTitle("Detalji narudžbe")
+                    //.setTitle("Detalji narudžbe"
+                    .setPositiveButton(view.resources.getString(R.string.zatvori)){ _, _ ->
+
+                    }
                     .show()
                 val orderDetailsDialog = OrderDetailsDialog(orderDetailsDialogView,currentOrder)
                 orderDetailsDialog.setOrderNum()

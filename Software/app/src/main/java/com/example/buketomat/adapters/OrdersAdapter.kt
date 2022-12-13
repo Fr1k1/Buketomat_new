@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.buketomat.R
+import com.example.buketomat.backgroundworkers.NetworkService
+import com.example.buketomat.helpers.OrderDetailsDialog
 import com.example.buketomat.models.Order
 import java.text.SimpleDateFormat
 import java.util.*
@@ -28,12 +30,15 @@ class OrdersAdapter(private val ordersList: ArrayList<Order>):RecyclerView.Adapt
             orderFinalPrice = view.findViewById(R.id.tv_order_final_price)
 
             view.setOnLongClickListener {
-
-                val orderDetailsDialog = LayoutInflater.from(view.context).inflate(R.layout.order_details_dialog, null)
+                val currentOrder = ordersList[adapterPosition]
+                val orderDetailsDialogView = LayoutInflater.from(view.context).inflate(R.layout.order_details_dialog, null)
                 AlertDialog.Builder(view.context)
-                    .setView(orderDetailsDialog)
+                    .setView(orderDetailsDialogView)
                     //.setTitle("Detalji narudžbe")
                     .show()
+                val orderDetailsDialog = OrderDetailsDialog(orderDetailsDialogView,currentOrder)
+                orderDetailsDialog.setOrderNum()
+                orderDetailsDialog.setOrderValue();
                /* val currentOrder = ordersList[adapterPosition];
                 val alertDialogBuilder = AlertDialog.Builder(view.context)
                     .setTitle("Naruđžba broj: " + currentOrder.Id)

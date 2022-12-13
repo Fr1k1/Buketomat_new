@@ -165,6 +165,38 @@ object NetworkService {
         queue.add(jsonRequest)
     }
 
+    fun getBouquetById(bouquetId: Int, callback: BouquetsSync, context: Context)
+    {
+        val queue =
+            Volley.newRequestQueue(context)
+        val url = baseurl + "GetBouquet.php"
+        val bouquetById: MutableList<Bouquet> = mutableListOf()
+
+        val jsonBouquet = JSONObject().put("id", bouquetId)
+        val requestBody = JSONArray().put(jsonBouquet)
+        Log.d("JSON", requestBody.toString())
+
+        val jsonRequest = JsonArrayRequest(Request.Method.POST, url, requestBody,
+            { response ->
+                Log.d("API", response.toString())
+                try {
+                    for (i in 0 until response.length()) {
+                        val bouquetRaw = response.getJSONObject(i)
+                        bouquetById.add(Bouquet(bouquetRaw))
+                    }
+                } catch (e: JSONException) {
+                    e.printStackTrace()
+                }finally {
+                    callback.AddBouquetsToList(bouquetById)
+                }
+            },
+            { error ->
+                Log.d("API", "Something went wrong while establishing connection to server")
+                Log.e("Volly Error", error.toString());
+            })
+        queue.add(jsonRequest)
+    }
+
     fun getBouquets(
         callback: BouquetsSync,
         context: Context

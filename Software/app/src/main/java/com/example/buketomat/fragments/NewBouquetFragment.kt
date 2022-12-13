@@ -13,15 +13,22 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.buketomat.MainActivity
 import com.example.buketomat.R
+import com.example.buketomat.adapters.BouquetsAdapter
 import com.example.buketomat.adapters.FlowerAdapter
 import com.example.buketomat.adapters.OrdersAdapter
+import com.example.buketomat.backgroundworkers.BouquetsSync
 import com.example.buketomat.backgroundworkers.FlowersSync
 import com.example.buketomat.backgroundworkers.NetworkService
+import com.example.buketomat.models.Bouquet
 import com.example.buketomat.models.Flower
 import com.example.buketomat.models.Order
 
-class NewBouquetFragment : Fragment(), FlowersSync {
+class NewBouquetFragment : Fragment(), FlowersSync, BouquetsSync {
 
+    // za random buket
+    private lateinit var rvRandomFinishedBouquet: RecyclerView
+
+    // za unos novog buketa
     private lateinit var rvFlowers : RecyclerView
     lateinit var btnDodajAutomatski : Button
     lateinit var btnNapraviBuket : Button
@@ -42,9 +49,11 @@ class NewBouquetFragment : Fragment(), FlowersSync {
         btnNapraviBuket = view.findViewById(R.id.btnNapraviBuket)
 
         btnDodajAutomatski.setOnClickListener{
-            val randomBroj = (0..10).random()
-            Toast.makeText(context, "Random buket ID: " + randomBroj, Toast.LENGTH_LONG).show()
+            val randomBroj = (1..10).random()
+            Toast.makeText(context, "Random buket ID: " + randomBroj.toString(), Toast.LENGTH_LONG).show()
             // TODO smisli kak bu se ovo
+            // za random buket
+            NetworkService.getBouquetById(randomBroj,this, requireContext()) // mislim da se ni ne pozove
         }
 
         btnNapraviBuket.setOnClickListener {
@@ -70,14 +79,26 @@ class NewBouquetFragment : Fragment(), FlowersSync {
         var activity = activity as MainActivity
         //Log.i("User",activity.user.id.toString())
         NetworkService.getFlowers(this,requireContext())
+
+         NetworkService.getBouquetById(5,this, requireContext())
+        //NetworkService.getBouquets(this, requireContext())
     }
 
+    // za unos novog buketa
     override fun AddFlowersToList(result: MutableList<Flower>) {
         rvFlowers = requireView().findViewById(R.id.rvFlowers)
         //val orderAdapter = OrdersAdapter(MockDataLoader.getDemoDataOrders())
         val flowerAdapter = FlowerAdapter(result as ArrayList<Flower>)
         rvFlowers.layoutManager = LinearLayoutManager(requireView().context)
         rvFlowers.adapter = flowerAdapter
+    }
+
+    // za random buket
+    override fun AddBouquetsToList(result: MutableList<Bouquet>) {
+        rvRandomFinishedBouquet = requireView().findViewById(R.id.rvRandomFinishedBouquet)
+        val bouquetAdapter = BouquetsAdapter(result as ArrayList<Bouquet>)
+        rvRandomFinishedBouquet.layoutManager = LinearLayoutManager(requireView().context)
+        rvRandomFinishedBouquet.adapter = bouquetAdapter
     }
 
 }

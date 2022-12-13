@@ -80,7 +80,7 @@ class NewBouquetFragment : Fragment(), FlowersSync, BouquetsSync {
         //Log.i("User",activity.user.id.toString())
         NetworkService.getFlowers(this,requireContext())
 
-         NetworkService.getBouquetById(5,this, requireContext())
+        // NetworkService.getBouquetById(5,this, requireContext())
         //NetworkService.getBouquets(this, requireContext())
     }
 

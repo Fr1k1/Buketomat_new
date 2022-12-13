@@ -5,7 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true">
+    android:fillViewport="false"
+    >
 
 <androidx.constraintlayout.widget.ConstraintLayout
     android:id="@+id/constraintLayout2"
@@ -37,46 +38,47 @@
         android:text="Dodaj automatski buket"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.483"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.024" />
+        app:layout_constraintVertical_bias="0.059" />
 
     <Button
         android:id="@+id/btnNapraviBuket"
-        android:layout_width="348dp"
-        android:layout_height="81dp"
+        android:layout_width="338dp"
+        android:layout_height="68dp"
         android:layout_marginTop="28dp"
         android:text="Napravi buket"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintHorizontal_bias="0.49"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/rvFlowers"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.003" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvFlowers"
-        android:layout_width="355dp"
-        android:layout_height="281dp"
+        android:layout_width="339dp"
+        android:layout_height="275dp"
         android:layout_marginTop="19dp"
         android:layout_marginBottom="192dp"
         android:background="#AB667F"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.553"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnDodajAutomatski"
         app:layout_constraintVertical_bias="0.006" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvRandomFinishedBouquet"
-        android:layout_width="328dp"
-        android:layout_height="303dp"
-        android:layout_marginTop="26dp"
+        android:layout_width="345dp"
+        android:layout_height="471dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnNapraviBuket" />
+        app:layout_constraintTop_toBottomOf="@+id/btnNapraviBuket"
+        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

@@ -37,17 +37,8 @@ class LoginFragment : Fragment() , UsersSync  {     //UsersSync is interface tha
         etLozinka = view.findViewById(R.id.etLozinka)
 
         btnLogin.setOnClickListener{
-
-            val rezultat = NetworkService.getUsers(etKorime.text.toString(),etLozinka.text.toString(),this, requireContext())
-
-            //if (etKorime.text.toString()==)
-
+            NetworkService.getUsers(etKorime.text.toString(),etLozinka.text.toString(),this, requireContext())
         }
-
-    }
-    fun ShowUsersToast(context: Context)
-    {
-        //NetworkService.getUsers(this,context)           //you can send keyword this only if current class implements VolleyCallback interface
     }
 
     override fun onUsersReceived(result: MutableList<User>) {
@@ -58,8 +49,5 @@ class LoginFragment : Fragment() , UsersSync  {     //UsersSync is interface tha
         }else{
             Toast.makeText(context, "neuspjesna prijava ", Toast.LENGTH_SHORT).show()
         }
-
     }
-
-
 }

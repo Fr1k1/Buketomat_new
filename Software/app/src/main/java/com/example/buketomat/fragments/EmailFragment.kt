@@ -15,26 +15,20 @@ import com.example.buketomat.R
 
 
 class EmailFragment : Fragment() {
-
-
     lateinit var editTextSubject: EditText
     lateinit var editTextMessage: EditText
     lateinit var buttonSend: Button
     lateinit var subject: String
     lateinit var message: String
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         return inflater.inflate(R.layout.fragment_email, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
-
         editTextSubject = view.findViewById(R.id.editTextSubject)
         editTextMessage = view.findViewById(R.id.editTextMessage)
         buttonSend = view.findViewById(R.id.buttonSend)
@@ -48,15 +42,12 @@ class EmailFragment : Fragment() {
             intent.putExtra(Intent.EXTRA_SUBJECT, subject)
             intent.putExtra(Intent.EXTRA_TEXT, message)
             intent.type = "message/rfc822"
-            startActivity(Intent.createChooser(intent, "Select email"))
+            startActivity(Intent.createChooser(intent, "Odaberite mail: "))
         }
     }
 
     private fun getData() {
-
         subject = editTextSubject.text.toString()
         message = editTextMessage.text.toString()
     }
-
-
 }

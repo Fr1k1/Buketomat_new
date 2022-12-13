@@ -103,10 +103,10 @@ object NetworkService {
         korisnik: User,
         callback: UsersSync,
         context: Context
-    )            //callback param is used to await data before doing something with it
+    )
     {
         val queue =
-            Volley.newRequestQueue(context)                                    //this is list of all request - it should probably be global in the future (btw requests can be canceled)
+            Volley.newRequestQueue(context)
         val url = baseurl + "InsertUser.php"
         val users: MutableList<User> = mutableListOf()
 
@@ -123,7 +123,7 @@ object NetworkService {
         Log.d("JSON", requestBody.toString())
 
         val jsonRequest = JsonArrayRequest(Request.Method.POST, url, requestBody, //kasnije se moze dodati provjera dal je success
-            //baza vraca duplicate entry za npr. unique mail..searcha se json objekt po error ili success....to stignem kasnije
+            //baza vraca duplicate entry za npr. unique mail..searcha se json objekt po error ili success...
 
             { response ->
                 Log.d("API", response.toString())
@@ -197,24 +197,17 @@ object NetworkService {
         queue.add(jsonRequest)
     }
 
-    fun getBouquets(
-        callback: BouquetsSync,
-        context: Context
-    )            //callback param is used to await data before doing something with it
+    fun getBouquets(callback: BouquetsSync, context: Context)
     {
         val queue =
-            Volley.newRequestQueue(context)                                    //this is list of all request - it should probably be global in the future (btw requests can be canceled)
+            Volley.newRequestQueue(context)
         val url = baseurl + "GetBouquets.php"
         val bouquets: MutableList<Bouquet> = mutableListOf()
-
-       /* val jsonUser = JSONObject().put("korisnik_id", korisnikId)
-        val requestBody = JSONArray().put(jsonUser)
-        Log.d("JSON", requestBody.toString())*/
 
         val jsonRequest = JsonArrayRequest(Request.Method.GET, url, null,
             { response ->
                 Log.d("API", response.toString())
-                try {                                                                   //try-catch is here to prevent crashes caused by wrong data format
+                try {
                     for (i in 0 until response.length()) {
                         val bouquetRaw = response.getJSONObject(i)
                         bouquets.add(Bouquet(bouquetRaw))
@@ -222,8 +215,7 @@ object NetworkService {
                 } catch (e: JSONException) {
                     e.printStackTrace()
                 }finally {
-                    callback.AddBouquetsToList(bouquets)                                           //tell parent that data is ready
-
+                    callback.AddBouquetsToList(bouquets)
                 }
             },
             { error ->

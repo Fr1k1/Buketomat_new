@@ -26,8 +26,8 @@ class FlowerAdapter(private val flowerList: ArrayList<Flower>): RecyclerView.Ada
 
         fun bind(flower: Flower) {
             // flowerId.text = "Id: " + flower.Id.toString()
-            flowerName.text = "Naziv: " + flower.Name
-            flowerPrice.text = "Cijena: " + flower.Price.toString()
+            flowerName.text = flower.Name
+            flowerPrice.text = "Cijena: " + flower.Price.toString() + " EUR"
         }
     }
 

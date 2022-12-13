@@ -50,15 +50,16 @@ class NewBouquetFragment : Fragment(), FlowersSync, BouquetsSync {
 
         btnDodajAutomatski.setOnClickListener{
             val randomBroj = (1..10).random()
-            Toast.makeText(context, "Random buket ID: " + randomBroj.toString(), Toast.LENGTH_LONG).show()
-            // TODO smisli kak bu se ovo
+            Toast.makeText(context, "Random buket ID: " + randomBroj.toString(), Toast.LENGTH_SHORT).show()
             // za random buket
-            NetworkService.getBouquetById(randomBroj,this, requireContext()) // mislim da se ni ne pozove
+            NetworkService.getBouquetById(randomBroj,this, requireContext())
         }
 
         btnNapraviBuket.setOnClickListener {
             val itemCount = rvFlowers.adapter?.itemCount
             for (i in 0 until itemCount!!) {
+
+                // prolazi kroz sve i vraca viewholder za item na toj poziciji
                 val holder = rvFlowers.findViewHolderForAdapterPosition(i)
                 if (holder != null) {
                     val flowerNameView = holder.itemView.findViewById<View>(R.id.tv_flower_name) as TextView
@@ -66,8 +67,9 @@ class NewBouquetFragment : Fragment(), FlowersSync, BouquetsSync {
                     val flowerKolicinaView = holder.itemView.findViewById<View>(R.id.etKolicina) as TextView
                     val flowerId = i+1
 
+                    // dohvati samo kojima je kolicina promijenjena
                     if (flowerKolicinaView.text.toString().toInt() > 0 ) {
-                        Toast.makeText(context, "Ime: " + flowerNameView.text.toString() + " id: " + flowerId + " kolicina: " + flowerKolicinaView.text.toString(), Toast.LENGTH_LONG).show()
+                        Toast.makeText(context, "Ime: " + flowerNameView.text.toString() + " id: " + flowerId + " kolicina: " + flowerKolicinaView.text.toString(), Toast.LENGTH_SHORT).show()
                     }
                 }
             }
@@ -76,18 +78,12 @@ class NewBouquetFragment : Fragment(), FlowersSync, BouquetsSync {
 
     override fun onResume() {
         super.onResume()
-        var activity = activity as MainActivity
-        //Log.i("User",activity.user.id.toString())
         NetworkService.getFlowers(this,requireContext())
-
-        // NetworkService.getBouquetById(5,this, requireContext())
-        //NetworkService.getBouquets(this, requireContext())
     }
 
     // za unos novog buketa
     override fun AddFlowersToList(result: MutableList<Flower>) {
         rvFlowers = requireView().findViewById(R.id.rvFlowers)
-        //val orderAdapter = OrdersAdapter(MockDataLoader.getDemoDataOrders())
         val flowerAdapter = FlowerAdapter(result as ArrayList<Flower>)
         rvFlowers.layoutManager = LinearLayoutManager(requireView().context)
         rvFlowers.adapter = flowerAdapter

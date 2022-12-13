@@ -20,7 +20,6 @@ class User {
         username: String,
         password: String
     ) {
-
         this.id = id
         this.name = name
         this.surname = surname
@@ -29,7 +28,6 @@ class User {
         this.username = username
         this.password = password
     }
-
 
     constructor(data: JSONObject) {
         this.id = data.getInt("id")
@@ -45,5 +43,4 @@ class User {
         return username
     }
 }
-// ToDo ako je preporuka da klasa sadrzi podatke onda je data class...nakon prve faze dodaj sve podatke o korisniku
 

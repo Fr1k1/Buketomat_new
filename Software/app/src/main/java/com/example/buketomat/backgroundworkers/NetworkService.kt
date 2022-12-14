@@ -17,11 +17,18 @@ import org.json.JSONObject
 
 
 object NetworkService {
-    private const val baseurl: String ="https://buketomatdb.000webhostapp.com/"                       //server url
+    private const val baseurl: String =
+        "https://buketomatdb.000webhostapp.com/"                       //server url
 
-    fun getUsers(korisnikKorime : String, korisnikLozinka : String,callback: UsersSync,context: Context)                            //callback param is used to await data before doing something with it
+    fun getUsers(
+        korisnikKorime: String,
+        korisnikLozinka: String,
+        callback: UsersSync,
+        context: Context
+    )                            //callback param is used to await data before doing something with it
     {
-        val queue = Volley.newRequestQueue(context)                                    //this is list of all request - it should probably be global in the future (btw requests can be canceled)
+        val queue =
+            Volley.newRequestQueue(context)                                    //this is list of all request - it should probably be global in the future (btw requests can be canceled)
         val url = baseurl + "GetUser.php"
         val users: MutableList<User> = mutableListOf()
         val jsonUser = JSONObject()
@@ -35,14 +42,14 @@ object NetworkService {
         val jsonRequest = JsonArrayRequest(Request.Method.POST,
             url,
             requestBody,     //defines new request(method,url,success and failure callback functions)
-            {
-                    response ->Log.d("API", response.toString())
+            { response ->
+                Log.d("API", response.toString())
                 try {                                                                   //try-catch is here to prevent crashes caused by wrong data format
                     for (i in 0 until response.length()) {
                         val orderRaw = response.getJSONObject(i)
                         users.add(User(orderRaw))
                     }
-                                                             //tell parent that data is ready
+                    //tell parent that data is ready
                 } catch (e: JSONException) {
                     e.printStackTrace()
                 } finally {
@@ -55,8 +62,7 @@ object NetworkService {
     }
 
 
-    fun getOrders(korisnikId: Int,callback: OrdersSync,context: Context)
-    {
+    fun getOrders(korisnikId: Int, callback: OrdersSync, context: Context) {
         val queue = Volley.newRequestQueue(context)
         val url = baseurl + "GetOrders.php"
         val orders: MutableList<Order> = mutableListOf()
@@ -75,18 +81,17 @@ object NetworkService {
                     }
                 } catch (e: JSONException) {
                     e.printStackTrace()
-                }finally {
+                } finally {
                     callback.AddOrdersToList(orders)
 
                 }
             },
-            { reportError(it) } )
+            { reportError(it) })
         queue.add(jsonRequest)
     }
 
-    fun addUser(korisnik: User,callback: UsersSync,context: Context)
-    {
-        val queue =Volley.newRequestQueue(context)
+    fun addUser(korisnik: User, callback: UsersSync, context: Context) {
+        val queue = Volley.newRequestQueue(context)
         val url = baseurl + "InsertUser.php"
         val users: MutableList<User> = mutableListOf()
 
@@ -102,7 +107,9 @@ object NetworkService {
         val requestBody = JSONArray().put(jsonUser)
         Log.d("JSON", requestBody.toString())
 
-        val jsonRequest = JsonArrayRequest(Request.Method.POST, url, requestBody, //kasnije se moze dodati provjera dal je success
+        val jsonRequest = JsonArrayRequest(Request.Method.POST,
+            url,
+            requestBody, //kasnije se moze dodati provjera dal je success
             //baza vraca duplicate entry za npr. unique mail..searcha se json objekt po error ili success...
 
             { response ->
@@ -113,8 +120,7 @@ object NetworkService {
         queue.add(jsonRequest)
     }
 
-    fun getFlowers(callback: FlowersSync, context: Context)
-    {
+    fun getFlowers(callback: FlowersSync, context: Context) {
         val queue =
             Volley.newRequestQueue(context)
         val url = baseurl + "GetFlowers.php"
@@ -130,19 +136,15 @@ object NetworkService {
                     }
                 } catch (e: JSONException) {
                     e.printStackTrace()
-                }finally {
+                } finally {
                     callback.AddFlowersToList(flowers)
                 }
             },
-            { error ->
-                Log.d("API", "Something went wrong while establishing connection to server")
-                Log.e("Volly Error", error.toString());
-            })
+            { reportError(it) })
         queue.add(jsonRequest)
     }
 
-    fun getBouquetById(bouquetId: Int, callback: BouquetsSync, context: Context)
-    {
+    fun getBouquetById(bouquetId: Int, callback: BouquetsSync, context: Context) {
         val queue =
             Volley.newRequestQueue(context)
         val url = baseurl + "GetBouquet.php"
@@ -162,19 +164,15 @@ object NetworkService {
                     }
                 } catch (e: JSONException) {
                     e.printStackTrace()
-                }finally {
+                } finally {
                     callback.AddBouquetsToList(bouquetById)
                 }
             },
-            { error ->
-                Log.d("API", "Something went wrong while establishing connection to server")
-                Log.e("Volly Error", error.toString());
-            })
+            { reportError(it) })
         queue.add(jsonRequest)
     }
 
-    fun getBouquets(callback: BouquetsSync, context: Context)
-    {
+    fun getBouquets(callback: BouquetsSync, context: Context) {
         val queue = Volley.newRequestQueue(context)
         val url = baseurl + "GetBouquets.php"
         val bouquets: MutableList<Bouquet> = mutableListOf()
@@ -189,7 +187,7 @@ object NetworkService {
                     }
                 } catch (e: JSONException) {
                     e.printStackTrace()
-                }finally {
+                } finally {
                     callback.AddBouquetsToList(bouquets)
                 }
             },
@@ -197,14 +195,14 @@ object NetworkService {
         queue.add(jsonRequest)
     }
 
-    fun getBouquetsFromOrder(callback: OrderBouquetsSync, context: Context, id : Int) {
-        val queue =Volley.newRequestQueue(context)
+    fun getBouquetsFromOrder(callback: OrderBouquetsSync, context: Context, id: Int) {
+        val queue = Volley.newRequestQueue(context)
         val url = baseurl + "GetBouquetsFromOrder.php"
         val orderBouquets: MutableList<OrderBouquet> = mutableListOf()
 
-         val jsonOrderId = JSONObject().put("id",id )
-         val requestBody = JSONArray().put(jsonOrderId)
-         Log.d("JSON", requestBody.toString())
+        val jsonOrderId = JSONObject().put("id", id)
+        val requestBody = JSONArray().put(jsonOrderId)
+        Log.d("JSON", requestBody.toString())
 
         val jsonRequest = JsonArrayRequest(Request.Method.POST, url, requestBody,
             { response ->
@@ -216,7 +214,7 @@ object NetworkService {
                     }
                 } catch (e: JSONException) {
                     e.printStackTrace()
-                }finally {
+                } finally {
                     callback.showOrderItems(orderBouquets)
 
                 }
@@ -225,10 +223,10 @@ object NetworkService {
         queue.add(jsonRequest)
     }
 
-    private fun reportError(error : VolleyError)
-    {
-            Log.d("API", "Something went wrong while establishing connection to server")
-            Log.e("Volly Error", error.toString());
+    private fun reportError(error: VolleyError) {
+        Log.d("API", "Something went wrong while establishing connection to server")
+        Log.e("Volly Error", error.toString());
 
 
+    }
 }

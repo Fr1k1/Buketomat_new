@@ -1,8 +1,8 @@
-package com.example.buketomat.models
+package com.example.buketomat.models;
 
 import org.json.JSONObject
 
-class Bouquet {
+open class Bouquet {
 
     val Id: Int
     val Name: String

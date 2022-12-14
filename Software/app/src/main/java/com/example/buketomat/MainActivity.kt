@@ -18,7 +18,21 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         createNavigation()
+        createUser()
 
+    }
+
+    private fun createUser()
+    {
+        val id = intent.getIntExtra("user_id",0)
+        val email = intent.getStringExtra("user_email")
+        val username = intent.getStringExtra("user_username")
+        val password = intent.getStringExtra("user_password")
+        val name = intent.getStringExtra("user_name")
+        val surname = intent.getStringExtra("user_surname")
+        val address = intent.getStringExtra("user_address")
+        if(id > 0)
+            user = User(id,name!!,surname!!,address!!,email!!,username!!,password!!)
     }
 
 
@@ -29,8 +43,10 @@ class MainActivity : AppCompatActivity() {
 
         val mainPageAdapter = MainPageAdapter(supportFragmentManager, lifecycle)
 
-        mainPageAdapter.AddFragment(MainPageAdapter.FragmentItem(R.string.registration, R.drawable.ic_launcher_background,RegistrationFragment::class))
+
+        /*mainPageAdapter.AddFragment(MainPageAdapter.FragmentItem(R.string.registration, R.drawable.ic_launcher_background,RegistrationFragment::class))
         mainPageAdapter.AddFragment(MainPageAdapter.FragmentItem(R.string.login,R.drawable.ic_launcher_background,LoginFragment::class))
+        */
         mainPageAdapter.AddFragment(MainPageAdapter.FragmentItem(R.string.mail_fragment,R.drawable.ic_baseline_shopping_bag_24,EmailFragment::class))
         mainPageAdapter.AddFragment(MainPageAdapter.FragmentItem(R.string.finished_bouquets_fragment,R.drawable.ic_baseline_shopping_bag_24,FinishedBouquetsFragment::class))
         mainPageAdapter.AddFragment(MainPageAdapter.FragmentItem(R.string.orders,R.drawable.ic_baseline_shopping_bag_24,OrdersFragment::class))

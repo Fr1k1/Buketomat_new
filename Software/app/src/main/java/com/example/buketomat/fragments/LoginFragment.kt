@@ -1,21 +1,21 @@
 package com.example.buketomat.fragments
 
-import android.content.Context
+import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
+import android.os.Parcel
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import com.example.buketomat.MainActivity
 import com.example.buketomat.R
 import com.example.buketomat.backgroundworkers.NetworkService
 import com.example.buketomat.backgroundworkers.UsersSync
 import com.example.buketomat.entites.User
-import com.example.buketomat.helpers.MockDataLoader
+
 
 class LoginFragment : Fragment() , UsersSync  {     //UsersSync is interface that is used to tell this class when data has been recived
 
@@ -43,9 +43,18 @@ class LoginFragment : Fragment() , UsersSync  {     //UsersSync is interface tha
 
     override fun onUsersReceived(result: MutableList<User>) {
         if(result.size > 0){
-            val activity = activity as MainActivity
-            activity.user = result[0]
+            val user : User = result[0]
             Toast.makeText(context, "uspjesna prijava ", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this.context, MainActivity::class.java)
+            val parcel : Parcel
+            intent.putExtra("user_id",user.id)
+            intent.putExtra("user_email",user.email)
+            intent.putExtra("user_username",user.username)
+            intent.putExtra("user_password",user.password)
+            intent.putExtra("user_name",user.name)
+            intent.putExtra("user_surname",user.surname)
+            intent.putExtra("user_address",user.address)
+            startActivity(intent)
         }else{
             Toast.makeText(context, "neuspjesna prijava ", Toast.LENGTH_SHORT).show()
         }

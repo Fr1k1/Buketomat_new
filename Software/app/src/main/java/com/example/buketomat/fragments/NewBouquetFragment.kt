@@ -92,7 +92,7 @@ class NewBouquetFragment : Fragment(), FlowersSync, BouquetsSync {
     // za random buket
     override fun AddBouquetsToList(result: MutableList<Bouquet>) {
         rvRandomFinishedBouquet = requireView().findViewById(R.id.rvRandomFinishedBouquet)
-        val bouquetAdapter = BouquetsAdapter(result as ArrayList<Bouquet>)
+        val bouquetAdapter = BouquetsAdapter(result as ArrayList<Bouquet>,activity as MainActivity)
         rvRandomFinishedBouquet.layoutManager = LinearLayoutManager(requireView().context)
         rvRandomFinishedBouquet.adapter = bouquetAdapter
     }

@@ -28,4 +28,5 @@
     <string name="iznos">Iznos:</string>
     <string name="zatvori">Zatvori</string>
     <string name="datum_dostave">Datum dostave: </string>
+    <string name="shopingCart">Košarica</string>
 </resources>

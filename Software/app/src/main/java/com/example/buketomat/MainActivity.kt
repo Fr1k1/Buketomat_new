@@ -4,16 +4,19 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.viewpager2.widget.ViewPager2
 import com.example.buketomat.adapters.MainPageAdapter
+import com.example.buketomat.backgroundworkers.BouquetClickListener
 import com.example.buketomat.entites.User
 import com.example.buketomat.fragments.*
+import com.example.buketomat.models.Bouquet
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity() , BouquetClickListener {
 
     private lateinit var tabLayout: TabLayout
     private lateinit var viewPager: ViewPager2
     lateinit  var user : User
+    var bouquets : MutableList<Bouquet>  = mutableListOf()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -51,6 +54,7 @@ class MainActivity : AppCompatActivity() {
         mainPageAdapter.AddFragment(MainPageAdapter.FragmentItem(R.string.finished_bouquets_fragment,R.drawable.ic_baseline_shopping_bag_24,FinishedBouquetsFragment::class))
         mainPageAdapter.AddFragment(MainPageAdapter.FragmentItem(R.string.orders,R.drawable.ic_baseline_shopping_bag_24,OrdersFragment::class))
         mainPageAdapter.AddFragment(MainPageAdapter.FragmentItem(R.string.new_order,R.drawable.ic_baseline_add_24,NewBouquetFragment::class))
+        mainPageAdapter.AddFragment(MainPageAdapter.FragmentItem(R.string.shopingCart,R.drawable.ic_baseline_shopping_bag_24,ShopingCardFragment::class))
 
 
         viewPager.adapter = mainPageAdapter
@@ -60,6 +64,10 @@ class MainActivity : AppCompatActivity() {
             tab.setText(mainPageAdapter.fragmentItems[position].titleRes)
             tab.setIcon(mainPageAdapter.fragmentItems[position].iconRes)
         }.attach()
+    }
+
+    override fun addBouquetToOrder(bouquet: Bouquet) {
+        bouquets.add(bouquet);
     }
 
 

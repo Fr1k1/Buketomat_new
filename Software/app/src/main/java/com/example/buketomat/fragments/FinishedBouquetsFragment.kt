@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.buketomat.MainActivity
@@ -20,6 +21,7 @@ import com.example.buketomat.models.Order
 class FinishedBouquetsFragment : Fragment(), BouquetsSync {
 
     private lateinit var rvFinishedBouquets: RecyclerView
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,10 +41,10 @@ class FinishedBouquetsFragment : Fragment(), BouquetsSync {
     override fun AddBouquetsToList(result: MutableList<Bouquet>) {
         rvFinishedBouquets = requireView().findViewById(R.id.rvFinishedBouquets)
 
-        val bouquetAdapter = BouquetsAdapter(result as ArrayList<Bouquet>)
+        val bouquetAdapter = BouquetsAdapter(result as ArrayList<Bouquet>,activity as MainActivity)
+
         rvFinishedBouquets.layoutManager = LinearLayoutManager(requireView().context)
         rvFinishedBouquets.adapter = bouquetAdapter
-    }
 
-
+        }
 }

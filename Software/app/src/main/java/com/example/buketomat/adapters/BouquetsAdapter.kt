@@ -3,17 +3,21 @@ package com.example.buketomat.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.lifecycle.ViewTreeLifecycleOwner.get
 import androidx.recyclerview.widget.RecyclerView
+import com.example.buketomat.MainActivity
 import com.example.buketomat.R
+import com.example.buketomat.backgroundworkers.BouquetClickListener
 import com.example.buketomat.models.Bouquet
 import com.example.buketomat.models.Order
 import com.squareup.picasso.Picasso
 
-class BouquetsAdapter(private val bouquetsList: ArrayList<Bouquet>) :
+class BouquetsAdapter(private val bouquetsList: ArrayList<Bouquet>,private val callback: BouquetClickListener ) :
     RecyclerView.Adapter<BouquetsAdapter.BouquetViewHolder>() {
+
 
     inner class BouquetViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
@@ -21,12 +25,14 @@ class BouquetsAdapter(private val bouquetsList: ArrayList<Bouquet>) :
         private val bouquetDescription: TextView
         private val bouquetPrice: TextView
         private var bouquetImage: ImageView
+        private var btnAddItemToOrder: Button
 
         init {
             bouquetName = view.findViewById(R.id.tv_bouquetName)
             bouquetDescription = view.findViewById(R.id.tv_bouquetDescription)
             bouquetPrice = view.findViewById(R.id.tv_bouquetPrice)
             bouquetImage = view.findViewById(R.id.image_view)
+            btnAddItemToOrder = view.findViewById(R.id.btnAddToOrder)
         }
 
         fun bind(bouquet: Bouquet) {
@@ -37,6 +43,12 @@ class BouquetsAdapter(private val bouquetsList: ArrayList<Bouquet>) :
 
             // koristenje picasso libraryja za prikazivanje slike pomocu urla
             Picasso.with(bouquetImage.context).load(bouquet.Picture).into(bouquetImage)
+
+            btnAddItemToOrder.setOnClickListener{
+                callback.addBouquetToOrder(bouquet);
+            }
+
+
         }
     }
 

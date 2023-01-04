@@ -7,7 +7,7 @@ open class Bouquet {
     val Id: Int
     val Name: String
     var Description: String
-    lateinit var Flowers: ArrayList<Flower>
+    var Flowers: ArrayList<Flower> = arrayListOf()
     var Price: Double
     var Picture: String
 

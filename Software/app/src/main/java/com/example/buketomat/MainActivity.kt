@@ -7,7 +7,7 @@ import com.example.buketomat.adapters.MainPageAdapter
 import com.example.buketomat.backgroundworkers.BouquetClickListener
 import com.example.buketomat.entites.User
 import com.example.buketomat.fragments.*
-import com.example.buketomat.models.Bouquet
+import com.example.buketomat.models.OrderBouquet
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
@@ -16,7 +16,7 @@ class MainActivity : AppCompatActivity() , BouquetClickListener {
     private lateinit var tabLayout: TabLayout
     private lateinit var viewPager: ViewPager2
     lateinit  var user : User
-    var bouquets : MutableList<Bouquet>  = mutableListOf()
+    var shoppingItems : MutableList<OrderBouquet>  = mutableListOf()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -66,8 +66,20 @@ class MainActivity : AppCompatActivity() , BouquetClickListener {
         }.attach()
     }
 
-    override fun addBouquetToOrder(bouquet: Bouquet) {
-        bouquets.add(bouquet);
+    override fun addBouquetToOrder(orderItem: OrderBouquet) {
+        //addes order item to the list, if item already exist then just increase amount of it
+        val existingItem = (shoppingItems.find { it.Id == orderItem.Id })
+        if(existingItem != null)
+        {
+            existingItem.kolicina++;
+            shoppingItems[shoppingItems.indexOf(existingItem)] = existingItem;
+        }
+        else
+            shoppingItems.add(orderItem);
+    }
+
+    override fun removeBouquetFromOrder(orderItem: OrderBouquet) {
+        shoppingItems.remove(orderItem);
     }
 
 

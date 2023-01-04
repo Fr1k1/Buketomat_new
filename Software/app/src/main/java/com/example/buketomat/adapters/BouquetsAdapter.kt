@@ -13,6 +13,7 @@ import com.example.buketomat.R
 import com.example.buketomat.backgroundworkers.BouquetClickListener
 import com.example.buketomat.models.Bouquet
 import com.example.buketomat.models.Order
+import com.example.buketomat.models.OrderBouquet
 import com.squareup.picasso.Picasso
 
 class BouquetsAdapter(private val bouquetsList: ArrayList<Bouquet>,private val callback: BouquetClickListener ) :
@@ -44,8 +45,11 @@ class BouquetsAdapter(private val bouquetsList: ArrayList<Bouquet>,private val c
             // koristenje picasso libraryja za prikazivanje slike pomocu urla
             Picasso.with(bouquetImage.context).load(bouquet.Picture).into(bouquetImage)
 
+            //creating click event listener that will send selected bouquet to Main activity
             btnAddItemToOrder.setOnClickListener{
-                callback.addBouquetToOrder(bouquet);
+                //sending data to main activity is done using interface that implemented in main activity because we cant get reference to activity from this class
+
+                callback.addBouquetToOrder(OrderBouquet(bouquet));
             }
 
 

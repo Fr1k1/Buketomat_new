@@ -29,4 +29,6 @@
     <string name="zatvori">Zatvori</string>
     <string name="datum_dostave">Datum dostave: </string>
     <string name="shopingCart">Košarica</string>
+    <string name="Delete">Izbriši</string>
+    <string name="Cancel">Odustani</string>
 </resources>

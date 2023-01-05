@@ -6,7 +6,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.buketomat.MainActivity
@@ -14,7 +13,6 @@ import com.example.buketomat.R
 import com.example.buketomat.adapters.OrdersAdapter
 import com.example.buketomat.backgroundworkers.NetworkService
 import com.example.buketomat.backgroundworkers.OrdersSync
-import com.example.buketomat.helpers.MockDataLoader
 import com.example.buketomat.models.Order
 
 class OrdersFragment : Fragment() , OrdersSync {

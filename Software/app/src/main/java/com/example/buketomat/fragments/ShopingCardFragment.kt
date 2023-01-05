@@ -27,6 +27,7 @@ class ShopingCardFragment : Fragment() {
     private lateinit var btnContinue : Button
     private lateinit var shoppingItems : MutableList<OrderBouquet>
     private var total : Double = 0.0
+    private lateinit var dialog : AlertDialog
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -38,7 +39,7 @@ class ShopingCardFragment : Fragment() {
         var newOrderDialogView : View
         newOrderDialogView = LayoutInflater.from(view.context).inflate(R.layout.order_finalization, null)
         btnContinue.setOnClickListener {
-            AlertDialog.Builder(view.context)//create order dialog
+         dialog  =  AlertDialog.Builder(view.context)//create order dialog
                 .setView(newOrderDialogView)
                     //removes view to preventing it from crashing when reopening
                 .setOnDismissListener {
@@ -49,7 +50,7 @@ class ShopingCardFragment : Fragment() {
 
             //configure newOrderDialog
             var newOrderDialog : NewOrderDialog? = null;
-            newOrderDialog = NewOrderDialog(newOrderDialogView,shoppingItems,total)
+            newOrderDialog = NewOrderDialog(this,newOrderDialogView,shoppingItems,total,(activity as MainActivity).user)
             newOrderDialog.configureCalendar()
             newOrderDialog.setTotal();
         }
@@ -75,6 +76,14 @@ class ShopingCardFragment : Fragment() {
         shoppingItems.forEach {
             Log.i("OrderItems",it.Name + " " + it.kolicina);
         }
+    }
+
+    fun cleanUpAfterOrdering()
+    {
+        dialog.dismiss()
+        shoppingItems.clear()
+        (activity as MainActivity).showOrdersFragment();
+
     }
 
     public fun calculateTotal() {

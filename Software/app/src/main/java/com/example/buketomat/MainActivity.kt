@@ -82,5 +82,10 @@ class MainActivity : AppCompatActivity() , BouquetClickListener {
         shoppingItems.remove(orderItem);
     }
 
+    fun showOrdersFragment()
+    {
+        viewPager.setCurrentItem(2,true);
+    }
+
 
 }

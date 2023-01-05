@@ -2,6 +2,7 @@ package com.example.buketomat.backgroundworkers
 
 import android.content.Context
 import android.util.Log
+import android.widget.Toast
 import com.android.volley.Request
 import com.android.volley.VolleyError
 import com.android.volley.toolbox.JsonArrayRequest
@@ -115,6 +116,72 @@ object NetworkService {
             { response ->
                 Log.d("API", response.toString())
 
+            },
+            { reportError(it) })
+        queue.add(jsonRequest)
+    }
+
+    fun addOrder(order: Order, callback: NewOrderSync, context: Context) {
+        val queue = Volley.newRequestQueue(context)
+        val url = baseurl + "InsertOrder.php"
+
+
+        val jsonUser = JSONObject()
+        jsonUser.put("vrijeme", order.getOrderDate(true))
+        jsonUser.put("ukupni_iznos", order.FinalPrice)
+        jsonUser.put("vrijeme_dostave", order.getDeliveryDate(true))
+        jsonUser.put("adresa_dostave", order.DeliveryLocation)
+        jsonUser.put("korisnik_id", order.User.id)
+
+
+        val requestBody = JSONArray().put(jsonUser)
+        Log.d("JSON", requestBody.toString())
+
+        val jsonRequest = JsonArrayRequest(Request.Method.POST,
+            url,
+            requestBody,
+
+            { response ->
+                Log.d("API", response.toString())
+                try {
+                    callback.onOrderAdded(response.getJSONObject(0).getString("entryId").toInt())
+                }
+                catch (ex : JSONException)
+                {
+                    Toast.makeText(context, "Greška prilikom unosa narudžbe", Toast.LENGTH_LONG).show()
+                }
+            },
+            { reportError(it) })
+        queue.add(jsonRequest)
+    }
+
+    fun addOrderItem(item: OrderBouquet, orderId : Int, callback: NewOrderSync, context: Context) {
+        val queue = Volley.newRequestQueue(context)
+        val url = baseurl + "InsertOrderItem.php"
+
+
+        val jsonUser = JSONObject()
+        jsonUser.put("buket_id", item.Id)
+        jsonUser.put("narudzba_id",orderId )
+        jsonUser.put("kolicina", item.kolicina)
+
+        val requestBody = JSONArray().put(jsonUser)
+        Log.d("JSON", requestBody.toString())
+
+        val jsonRequest = JsonArrayRequest(Request.Method.POST,
+            url,
+            requestBody,
+
+            { response ->
+                Log.d("API", response.toString())
+                try {
+                    response.getJSONObject(0).getString("success") // if this doesn't cause exception then its success
+                    callback.onOrderItemAdded()
+                }
+                catch (ex : JSONException)
+                {
+                    Toast.makeText(context, "Greška prilikom unosa narudžbe", Toast.LENGTH_LONG).show()
+                }
             },
             { reportError(it) })
         queue.add(jsonRequest)

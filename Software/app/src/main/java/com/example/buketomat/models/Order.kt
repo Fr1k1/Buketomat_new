@@ -14,15 +14,17 @@ class Order {
     val OrderTime: Date
     val FinalPrice: Double
     val DeliveryTime: Date?
+    val DeliveryLocation : String
     lateinit var Bouquets: List<Bouquet>
     lateinit var User : User
 
-    constructor(Id : Int ,FinalPrice: Double, DeliveryTime: Date? , User : User )
+    constructor(Id : Int ,FinalPrice: Double, DeliveryTime: Date? ,DeliveryLocation : String, User : User )
     {
         this.Id = Id
         this.FinalPrice = FinalPrice
         this.OrderTime = Calendar.getInstance().time
         this.DeliveryTime = DeliveryTime
+        this.DeliveryLocation = DeliveryLocation
         this.User = User
     }
 
@@ -32,17 +34,25 @@ class Order {
         OrderTime = sdf.parse(data.getString("vrijeme"))
         Log.i("SDF",OrderTime.toString());
         FinalPrice = data.getDouble("ukupni_iznos")
+        DeliveryLocation = data.getString("adresa_dostave")
         DeliveryTime = sdf.parse(data.getString("vrijeme_dostave"))
         //User = data.getString("korisnik_id")
     }
 
-    fun getDeliveryDate() : String
+    fun getDeliveryDate(dbFormat : Boolean = false) : String
     {
-        return sdfOut.format(DeliveryTime);
+        return if(!dbFormat)
+            sdfOut.format(DeliveryTime)
+        else
+            sdf.format(DeliveryTime)
     }
 
-    fun getOrderDate() : String
+    fun getOrderDate(dbFormat : Boolean = false) : String
     {
-        return sdfOut.format(OrderTime);
+        return if(!dbFormat)
+            sdfOut.format(OrderTime)
+        else
+            sdf.format(OrderTime)
     }
+
 }

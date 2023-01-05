@@ -42,7 +42,6 @@ class OrdersAdapter(private val ordersList: ArrayList<Order>):RecyclerView.Adapt
                 orderDetailsDialog.setOrderValue();
                 orderDetailsDialog.setOrderDate()
                 orderDetailsDialog.setDeliveryDate()
-
                 return@setOnLongClickListener true
             }
         }

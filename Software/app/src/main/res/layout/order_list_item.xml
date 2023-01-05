@@ -36,7 +36,7 @@
 
             <TextView
                 android:id="@+id/tv_order_final_price"
-                android:layout_width="97dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="30dp"
                 android:textSize="24sp"

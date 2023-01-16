@@ -23,7 +23,7 @@ class ShoppingCartActivity : AppCompatActivity() , BouquetClickListener {
         shoppingItems.forEach {
             Log.i("OrderItems",it.Name + " " + it.kolicina);
         }
-        createUser()
+        user = intent.getParcelableExtra<User>("user")!!
         val fragmentManager = supportFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()
         val fragment = ShopingCardFragment()
@@ -49,31 +49,12 @@ class ShoppingCartActivity : AppCompatActivity() , BouquetClickListener {
     }
 
 
-    private fun createUser()
-    {
-        val id = intent.getIntExtra("user_id",0)
-        val email = intent.getStringExtra("user_email")
-        val username = intent.getStringExtra("user_username")
-        val password = intent.getStringExtra("user_password")
-        val name = intent.getStringExtra("user_name")
-        val surname = intent.getStringExtra("user_surname")
-        val address = intent.getStringExtra("user_address")
-        if(id > 0)
-            user = User(id,name!!,surname!!,address!!,email!!,username!!,password!!)
-    }
-
     fun showOrdersFragment()
     {
 
         val intent = Intent(this, MainActivity::class.java)
         intent.putExtra("methodToCall", "orderList")
-        intent.putExtra("user_id",user.id)
-        intent.putExtra("user_email",user.email)
-        intent.putExtra("user_username",user.username)
-        intent.putExtra("user_password",user.password)
-        intent.putExtra("user_name",user.name)
-        intent.putExtra("user_surname",user.surname)
-        intent.putExtra("user_address",user.address)
+        intent.putExtra("user",user)
         startActivity(intent)
         finish()
 

@@ -35,14 +35,7 @@ class MainActivity : AppCompatActivity() , BouquetClickListener {
             else {
                 val intent = Intent(this, ShoppingCartActivity::class.java)
                 intent.putParcelableArrayListExtra("shoppingCart", ArrayList(shoppingItems))
-                intent.putParcelableArrayListExtra("shoppingCart", ArrayList(shoppingItems))
-                intent.putExtra("user_id",user.id)
-                intent.putExtra("user_email",user.email)
-                intent.putExtra("user_username",user.username)
-                intent.putExtra("user_password",user.password)
-                intent.putExtra("user_name",user.name)
-                intent.putExtra("user_surname",user.surname)
-                intent.putExtra("user_address",user.address)
+                intent.putExtra("user",user)
                 startActivity(intent)
             }
         }
@@ -55,15 +48,8 @@ class MainActivity : AppCompatActivity() , BouquetClickListener {
 
     private fun createUser()
     {
-        val id = intent.getIntExtra("user_id",0)
-        val email = intent.getStringExtra("user_email")
-        val username = intent.getStringExtra("user_username")
-        val password = intent.getStringExtra("user_password")
-        val name = intent.getStringExtra("user_name")
-        val surname = intent.getStringExtra("user_surname")
-        val address = intent.getStringExtra("user_address")
-        if(id > 0)
-            user = User(id,name!!,surname!!,address!!,email!!,username!!,password!!)
+        user = intent.getParcelableExtra<User>("user")!!
+
     }
 
 

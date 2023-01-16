@@ -46,14 +46,7 @@ class LoginFragment : Fragment() , UsersSync  {     //UsersSync is interface tha
             val user : User = result[0]
             Toast.makeText(context, "uspjesna prijava ", Toast.LENGTH_SHORT).show()
             val intent = Intent(this.context, MainActivity::class.java)
-            val parcel : Parcel
-            intent.putExtra("user_id",user.id)
-            intent.putExtra("user_email",user.email)
-            intent.putExtra("user_username",user.username)
-            intent.putExtra("user_password",user.password)
-            intent.putExtra("user_name",user.name)
-            intent.putExtra("user_surname",user.surname)
-            intent.putExtra("user_address",user.address)
+            intent.putExtra("user",user);
             startActivity(intent)
         }else{
             Toast.makeText(context, "neuspjesna prijava ", Toast.LENGTH_SHORT).show()

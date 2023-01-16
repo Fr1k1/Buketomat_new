@@ -1,9 +1,8 @@
 package com.example.buketomat.fragments
 
-import android.opengl.Visibility
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,14 +10,16 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.buketomat.MainActivity
 import com.example.buketomat.R
+import com.example.buketomat.ShoppingCartActivity
 import com.example.buketomat.adapters.ShoppingCartAdapter
 import com.example.buketomat.helpers.NewOrderDialog
-import com.example.buketomat.helpers.OrderDetailsDialog
 import com.example.buketomat.models.OrderBouquet
+
 
 class ShopingCardFragment : Fragment() {
 
@@ -50,7 +51,7 @@ class ShopingCardFragment : Fragment() {
 
             //configure newOrderDialog
             var newOrderDialog : NewOrderDialog? = null;
-            newOrderDialog = NewOrderDialog(this,newOrderDialogView,shoppingItems,total,(activity as MainActivity).user)
+            newOrderDialog = NewOrderDialog(this,newOrderDialogView,shoppingItems,total,(activity as ShoppingCartActivity).user)
             newOrderDialog.configureCalendar()
             newOrderDialog.setTotal();
         }
@@ -82,7 +83,11 @@ class ShopingCardFragment : Fragment() {
     {
         dialog.dismiss()
         shoppingItems.clear()
-        (activity as MainActivity).showOrdersFragment();
+
+
+
+        (activity as ShoppingCartActivity).showOrdersFragment()
+
 
     }
 
@@ -106,10 +111,10 @@ class ShopingCardFragment : Fragment() {
 
     private fun createList()
     {
-        var activity = activity as MainActivity;
+        var activity = activity as ShoppingCartActivity;
         shoppingItems = activity.shoppingItems
         rvShoppingItems = requireView().findViewById(R.id.rvShoppingItems)
-        val shoppingCartAdapter = ShoppingCartAdapter(shoppingItems,activity,this)
+        val shoppingCartAdapter = ShoppingCartAdapter(shoppingItems,activity as ShoppingCartActivity,this)
         rvShoppingItems.layoutManager = LinearLayoutManager(requireView().context)
         rvShoppingItems.adapter = shoppingCartAdapter
     }

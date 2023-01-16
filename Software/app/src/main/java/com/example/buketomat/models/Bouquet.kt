@@ -1,8 +1,10 @@
-package com.example.buketomat.models;
+package com.example.buketomat.models
 
+import android.os.Parcel
+import android.os.Parcelable
 import org.json.JSONObject
 
-open class Bouquet {
+open class Bouquet : Parcelable {
 
     val Id: Int
     val Name: String
@@ -33,7 +35,37 @@ open class Bouquet {
         Description = data.getString("opis")
         Price = data.getDouble("cijena")
         Picture = data.getString("slika")
-        //Flowers=data.getString("cvjetovi")
+    }
+
+    constructor(parcel: Parcel) : this(
+        parcel.readInt(),
+        parcel.readString()!!,
+        parcel.readString()!!,
+        parcel.readArrayList(Flower::class.java.classLoader) as ArrayList<Flower>,
+        parcel.readDouble(),
+        parcel.readString()!!
+    )
+
+    override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeInt(Id)
+        parcel.writeString(Name)
+        parcel.writeString(Description)
+        parcel.writeList(Flowers)
+        parcel.writeDouble(Price)
+        parcel.writeString(Picture)
+    }
+    override fun describeContents(): Int {
+        return 0
+    }
+
+    companion object CREATOR : Parcelable.Creator<Bouquet> {
+        override fun createFromParcel(parcel: Parcel): Bouquet {
+            return Bouquet(parcel)
+        }
+
+        override fun newArray(size: Int): Array<Bouquet?> {
+            return arrayOfNulls(size)
+        }
     }
 }
 

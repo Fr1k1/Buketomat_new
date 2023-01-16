@@ -1,22 +1,20 @@
 package com.example.buketomat.adapters
 
+import com.example.buketomat.models.Bouquet
+import com.example.buketomat.models.OrderBouquet
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.lifecycle.ViewTreeLifecycleOwner.get
 import androidx.recyclerview.widget.RecyclerView
-import com.example.buketomat.MainActivity
 import com.example.buketomat.R
 import com.example.buketomat.backgroundworkers.BouquetClickListener
-import com.example.buketomat.models.Bouquet
-import com.example.buketomat.models.Order
-import com.example.buketomat.models.OrderBouquet
+
 import com.squareup.picasso.Picasso
 
-class BouquetsAdapter(private val bouquetsList: ArrayList<Bouquet>,private val callback: BouquetClickListener ) :
+class BouquetsAdapter(private val bouquetsList: ArrayList<Bouquet>, private val callback: BouquetClickListener ) :
     RecyclerView.Adapter<BouquetsAdapter.BouquetViewHolder>() {
 
 

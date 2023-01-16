@@ -1,5 +1,6 @@
 package com.example.buketomat.adapters
 
+import com.example.buketomat.models.OrderBouquet
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -7,9 +8,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.buketomat.R
-import com.example.buketomat.models.Bouquet
-import com.example.buketomat.models.Order
-import com.example.buketomat.models.OrderBouquet
+
 import com.squareup.picasso.Picasso
 
 

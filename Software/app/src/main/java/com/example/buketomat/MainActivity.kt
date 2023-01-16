@@ -1,13 +1,18 @@
 package com.example.buketomat
 
-import androidx.appcompat.app.AppCompatActivity
+
+
+import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.ViewPager2
 import com.example.buketomat.adapters.MainPageAdapter
 import com.example.buketomat.backgroundworkers.BouquetClickListener
 import com.example.buketomat.entites.User
 import com.example.buketomat.fragments.*
 import com.example.buketomat.models.OrderBouquet
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
@@ -16,14 +21,37 @@ class MainActivity : AppCompatActivity() , BouquetClickListener {
     private lateinit var tabLayout: TabLayout
     private lateinit var viewPager: ViewPager2
     lateinit  var user : User
+    private lateinit var shoppingCart : FloatingActionButton
     var shoppingItems : MutableList<OrderBouquet>  = mutableListOf()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         createNavigation()
         createUser()
-
+        shoppingCart = findViewById(R.id.fab_shopping_cart)
+        shoppingCart.setOnClickListener{
+            if(shoppingItems.size == 0)
+                Toast.makeText(this,"Košarica je prazna!!!",Toast.LENGTH_SHORT).show()
+            else {
+                val intent = Intent(this, ShoppingCartActivity::class.java)
+                intent.putParcelableArrayListExtra("shoppingCart", ArrayList(shoppingItems))
+                intent.putParcelableArrayListExtra("shoppingCart", ArrayList(shoppingItems))
+                intent.putExtra("user_id",user.id)
+                intent.putExtra("user_email",user.email)
+                intent.putExtra("user_username",user.username)
+                intent.putExtra("user_password",user.password)
+                intent.putExtra("user_name",user.name)
+                intent.putExtra("user_surname",user.surname)
+                intent.putExtra("user_address",user.address)
+                startActivity(intent)
+            }
+        }
+        val methodToCall = intent.getStringExtra("methodToCall")
+        if (methodToCall == "orderList") {
+            showOrdersFragment()
+        }
     }
+
 
     private fun createUser()
     {
@@ -54,7 +82,6 @@ class MainActivity : AppCompatActivity() , BouquetClickListener {
         mainPageAdapter.AddFragment(MainPageAdapter.FragmentItem(R.string.finished_bouquets_fragment,R.drawable.ic_baseline_shopping_bag_24,FinishedBouquetsFragment::class))
         mainPageAdapter.AddFragment(MainPageAdapter.FragmentItem(R.string.orders,R.drawable.ic_baseline_shopping_bag_24,OrdersFragment::class))
         mainPageAdapter.AddFragment(MainPageAdapter.FragmentItem(R.string.new_order,R.drawable.ic_baseline_add_24,NewBouquetFragment::class))
-        mainPageAdapter.AddFragment(MainPageAdapter.FragmentItem(R.string.shopingCart,R.drawable.ic_baseline_shopping_bag_24,ShopingCardFragment::class))
 
 
         viewPager.adapter = mainPageAdapter
@@ -84,6 +111,7 @@ class MainActivity : AppCompatActivity() , BouquetClickListener {
 
     fun showOrdersFragment()
     {
+        //this function is called here because navigation isn't initialized at this point
         viewPager.setCurrentItem(2,true);
     }
 

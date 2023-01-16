@@ -30,7 +30,7 @@ class NewOrderDialog : NewOrderSync {
         val User : User
         var counter = 0;
         val parent : ShopingCardFragment
-        lateinit var  selectedDate : Date
+        var  selectedDate : Date = Calendar.getInstance().time
         private lateinit var calDeliveryDate : CalendarView
         private lateinit var etAdress : EditText
         constructor(frag : ShopingCardFragment, view: View, orderItems : MutableList<OrderBouquet>,total : Double,User : User)

@@ -59,6 +59,7 @@ class NewBouquetFragment : Fragment(), FlowersSync, BouquetsSync {
 
         btnNapraviBuket.setOnClickListener {
             var total = 0.0
+            var opisBuketa : String = "Custom buket, cvijece: ";
             val itemCount = rvFlowers.adapter?.itemCount
             for (i in 0 until itemCount!!) {
 
@@ -74,9 +75,12 @@ class NewBouquetFragment : Fragment(), FlowersSync, BouquetsSync {
                     if (flowerKolicinaView.text.toString().toInt() > 0 ) {
                         Toast.makeText(context, flowerPriceView.text.toString() +" Ime: " + flowerNameView.text.toString() + " id: " + flowerId + " kolicina: " + flowerKolicinaView.text.toString(), Toast.LENGTH_SHORT).show()
 
+                        opisBuketa += flowerKolicinaView.text.toString() + " " + flowerNameView.text.toString() + " ";
+
                         // racunanje ukupne cijene buketa
                         total += flowerKolicinaView.text.toString().toDouble() * flowerPriceView.text.toString().toDouble();
                         Toast.makeText(context, total.toString(), Toast.LENGTH_SHORT).show()
+
 
                         var cvijet = Flower(
                             Id = flowerId,
@@ -92,7 +96,7 @@ class NewBouquetFragment : Fragment(), FlowersSync, BouquetsSync {
                     }
                 }
             }
-            NetworkService.addBouquet(total, this, requireContext()) // dodavanje u tablicu buket
+            NetworkService.addBouquet(total, opisBuketa, this, requireContext()) // dodavanje u tablicu buket
         }
     }
 

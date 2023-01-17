@@ -5,7 +5,7 @@ import org.json.JSONObject
 import java.util.*
 import kotlin.collections.ArrayList
 
-class Flower {
+open class Flower { // open da se moze napravit klasa FlowerBouquet jer je inace final
 
     val Id: Int
     val Name: String

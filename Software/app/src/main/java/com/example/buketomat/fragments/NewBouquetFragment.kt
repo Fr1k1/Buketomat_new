@@ -20,9 +20,8 @@ import com.example.buketomat.backgroundworkers.BouquetsSync
 import com.example.buketomat.backgroundworkers.FlowersSync
 import com.example.buketomat.backgroundworkers.NetworkService
 import com.example.buketomat.entites.User
-import com.example.buketomat.models.Bouquet
-import com.example.buketomat.models.Flower
-import com.example.buketomat.models.Order
+import com.example.buketomat.models.*
+import java.util.jar.Attributes.Name
 
 class NewBouquetFragment : Fragment(), FlowersSync, BouquetsSync {
 
@@ -33,6 +32,8 @@ class NewBouquetFragment : Fragment(), FlowersSync, BouquetsSync {
     private lateinit var rvFlowers : RecyclerView
     lateinit var btnDodajAutomatski : Button
     lateinit var btnNapraviBuket : Button
+
+    val listaCvijecaUBuketu = mutableListOf<FlowerBouquet>() // ima i atribut kolicina
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -76,10 +77,22 @@ class NewBouquetFragment : Fragment(), FlowersSync, BouquetsSync {
                         // racunanje ukupne cijene buketa
                         total += flowerKolicinaView.text.toString().toDouble() * flowerPriceView.text.toString().toDouble();
                         Toast.makeText(context, total.toString(), Toast.LENGTH_SHORT).show()
+
+                        var cvijet = Flower(
+                            Id = flowerId,
+                            Name = flowerNameView.text.toString(),
+                            Price = flowerPriceView.text.toString().toDouble()
+                        )
+
+                        var cvijetBuket = FlowerBouquet( // objekt za buket_cvijet tablicu
+                            cvijet,
+                            flowerKolicinaView.text.toString().toInt()
+                        )
+                        listaCvijecaUBuketu.add(cvijetBuket);
                     }
                 }
             }
-            NetworkService.addBouquet(total, this, requireContext())
+            NetworkService.addBouquet(total, this, requireContext()) // dodavanje u tablicu buket
         }
     }
 
@@ -105,24 +118,19 @@ class NewBouquetFragment : Fragment(), FlowersSync, BouquetsSync {
     }
 
     override fun onBouquetAdded(orderId: Int) {
-        Toast.makeText(view?.context,"Order inserted",Toast.LENGTH_SHORT).show();
-        // add every item to db and assign it orderId
-        /*  orderItems.forEach { item ->
-              NetworkService.addOrderItem(item,orderId,this,view.context)
-          }*/
+         listaCvijecaUBuketu.forEach { item ->
+              NetworkService.addBouquetItem(item,orderId,this, requireContext()); // dodaje se svaki cvijet u buket_cvijet
+         }
     }
 
+    var counter : Int = 0;
     override fun onBouquetItemAdded() {
-        /*counter++
-        if(counter == orderItems.size)  //if all items are added then say it was successful
+        counter++
+        if(counter == listaCvijecaUBuketu.size)
         {
-            Toast.makeText(view.context,"Order items inserted successfully",Toast.LENGTH_SHORT).show();
-            //reset back to 0,probably not needed
+            // uspjesan unos svega
             counter = 0;
-            //clear shopping cart
-            parent.cleanUpAfterOrdering()
-
-        }*/
+        }
     }
 
 }

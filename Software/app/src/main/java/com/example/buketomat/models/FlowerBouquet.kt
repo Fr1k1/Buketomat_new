@@ -2,15 +2,15 @@ package com.example.buketomat.models
 
 import org.json.JSONObject
 
-class FlowerBouquet{/*
+class FlowerBouquet : Flower { // jer flower nema kolicinu, a u tablici cvijet_buket je i atribut kolicina
     var kolicina : Int
 
-    constructor(bouquet: Bouquet) : super(bouquet.Id,bouquet.Name,bouquet.Description,bouquet.Flowers,bouquet.Price,bouquet.Picture)   // used for adding bouquets to order
+    constructor(flower: Flower, kolicina : Int) : super(flower.Id , flower.Name, flower.Price)
     {
-        this.kolicina = 1;
+        this.kolicina = kolicina;
     }
 
     constructor(data : JSONObject) : super(data) {
         this.kolicina = data.getInt("kolicina");
-    }*/
+    }
 }

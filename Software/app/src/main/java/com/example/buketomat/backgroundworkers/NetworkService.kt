@@ -115,12 +115,12 @@ object NetworkService {
         queue.add(jsonRequest)
     }
 
-    fun addBouquet(total : Double, opisBuketa : String, callback: BouquetsSync, context: Context) {
+    fun addBouquet(total : Double, opisBuketa : String, nazivBuketa : String, callback: BouquetsSync, context: Context) {
         val queue = Volley.newRequestQueue(context)
         val url = baseurl + "InsertBouquet.php"
         val jsonUser = JSONObject()
 
-        jsonUser.put("naziv","kreirao korisnik")
+        jsonUser.put("naziv",nazivBuketa)
         jsonUser.put("opis", opisBuketa)
         jsonUser.put("cijena", total)
         jsonUser.put("slika", "https://i.ibb.co/2vY51FV/custom-Buket.jpg")

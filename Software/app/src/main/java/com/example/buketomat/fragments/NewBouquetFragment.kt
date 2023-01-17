@@ -19,6 +19,7 @@ import com.example.buketomat.adapters.OrdersAdapter
 import com.example.buketomat.backgroundworkers.BouquetsSync
 import com.example.buketomat.backgroundworkers.FlowersSync
 import com.example.buketomat.backgroundworkers.NetworkService
+import com.example.buketomat.entites.User
 import com.example.buketomat.models.Bouquet
 import com.example.buketomat.models.Flower
 import com.example.buketomat.models.Order
@@ -56,6 +57,7 @@ class NewBouquetFragment : Fragment(), FlowersSync, BouquetsSync {
         }
 
         btnNapraviBuket.setOnClickListener {
+            var total = 0.0
             val itemCount = rvFlowers.adapter?.itemCount
             for (i in 0 until itemCount!!) {
 
@@ -69,10 +71,15 @@ class NewBouquetFragment : Fragment(), FlowersSync, BouquetsSync {
 
                     // dohvati samo kojima je kolicina promijenjena
                     if (flowerKolicinaView.text.toString().toInt() > 0 ) {
-                        Toast.makeText(context, "Ime: " + flowerNameView.text.toString() + " id: " + flowerId + " kolicina: " + flowerKolicinaView.text.toString(), Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context, flowerPriceView.text.toString() +" Ime: " + flowerNameView.text.toString() + " id: " + flowerId + " kolicina: " + flowerKolicinaView.text.toString(), Toast.LENGTH_SHORT).show()
+
+                        // racunanje ukupne cijene buketa
+                        total += flowerKolicinaView.text.toString().toDouble() * flowerPriceView.text.toString().toDouble();
+                        Toast.makeText(context, total.toString(), Toast.LENGTH_SHORT).show()
                     }
                 }
             }
+            NetworkService.addBouquet(total, this, requireContext())
         }
     }
 
@@ -95,6 +102,27 @@ class NewBouquetFragment : Fragment(), FlowersSync, BouquetsSync {
         val bouquetAdapter = BouquetsAdapter(result as ArrayList<Bouquet>,activity as MainActivity)
         rvRandomFinishedBouquet.layoutManager = LinearLayoutManager(requireView().context)
         rvRandomFinishedBouquet.adapter = bouquetAdapter
+    }
+
+    override fun onBouquetAdded(orderId: Int) {
+        Toast.makeText(view?.context,"Order inserted",Toast.LENGTH_SHORT).show();
+        // add every item to db and assign it orderId
+        /*  orderItems.forEach { item ->
+              NetworkService.addOrderItem(item,orderId,this,view.context)
+          }*/
+    }
+
+    override fun onBouquetItemAdded() {
+        /*counter++
+        if(counter == orderItems.size)  //if all items are added then say it was successful
+        {
+            Toast.makeText(view.context,"Order items inserted successfully",Toast.LENGTH_SHORT).show();
+            //reset back to 0,probably not needed
+            counter = 0;
+            //clear shopping cart
+            parent.cleanUpAfterOrdering()
+
+        }*/
     }
 
 }

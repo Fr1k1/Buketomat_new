@@ -123,6 +123,7 @@ object NetworkService {
         jsonUser.put("naziv","kreirao korisnik")
         jsonUser.put("opis", "custom rucno kreiran buket")
         jsonUser.put("cijena", total)
+        jsonUser.put("slika", "https://i.ibb.co/2vY51FV/custom-Buket.jpg")
 
         val requestBody = JSONArray().put(jsonUser)
         Log.d("JSON", requestBody.toString())
@@ -151,6 +152,7 @@ object NetworkService {
         jsonUser.put("cvijet_id", item.Id)
         jsonUser.put("buket_id",orderId )
         jsonUser.put("kolicina", item.kolicina)
+
 
         val requestBody = JSONArray().put(jsonUser)
         Log.d("JSON", requestBody.toString())

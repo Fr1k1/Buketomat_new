@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -32,6 +33,7 @@ class NewBouquetFragment : Fragment(), FlowersSync, BouquetsSync {
     private lateinit var rvFlowers : RecyclerView
     lateinit var btnDodajAutomatski : Button
     lateinit var btnNapraviBuket : Button
+    lateinit var etOpisBuketa : EditText
 
     val listaCvijecaUBuketu = mutableListOf<FlowerBouquet>() // ima i atribut kolicina
 
@@ -49,6 +51,7 @@ class NewBouquetFragment : Fragment(), FlowersSync, BouquetsSync {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         btnDodajAutomatski = view.findViewById(R.id.btnDodajAutomatski)
         btnNapraviBuket = view.findViewById(R.id.btnNapraviBuket)
+        etOpisBuketa = view.findViewById(R.id.etOpisBuketa)
 
         btnDodajAutomatski.setOnClickListener{
             val randomBroj = (1..10).random()
@@ -59,6 +62,8 @@ class NewBouquetFragment : Fragment(), FlowersSync, BouquetsSync {
 
         btnNapraviBuket.setOnClickListener {
             var total = 0.0
+            var nazivBuketa = "Buket ";
+            var opisBuketa = "Custom buket, cvijece: ";
             val itemCount = rvFlowers.adapter?.itemCount
             for (i in 0 until itemCount!!) {
 
@@ -73,10 +78,13 @@ class NewBouquetFragment : Fragment(), FlowersSync, BouquetsSync {
                     // dohvati samo kojima je kolicina promijenjena
                     if (flowerKolicinaView.text.toString().toInt() > 0 ) {
                         Toast.makeText(context, flowerPriceView.text.toString() +" Ime: " + flowerNameView.text.toString() + " id: " + flowerId + " kolicina: " + flowerKolicinaView.text.toString(), Toast.LENGTH_SHORT).show()
+                        nazivBuketa += flowerNameView.text.toString() + " ";
+                        opisBuketa += flowerKolicinaView.text.toString() + " " + flowerNameView.text.toString() + " ";
 
                         // racunanje ukupne cijene buketa
                         total += flowerKolicinaView.text.toString().toDouble() * flowerPriceView.text.toString().toDouble();
                         Toast.makeText(context, total.toString(), Toast.LENGTH_SHORT).show()
+
 
                         var cvijet = Flower(
                             Id = flowerId,
@@ -92,7 +100,11 @@ class NewBouquetFragment : Fragment(), FlowersSync, BouquetsSync {
                     }
                 }
             }
-            NetworkService.addBouquet(total, this, requireContext()) // dodavanje u tablicu buket
+            // dodaje se jos korisnikov opis
+            opisBuketa += etOpisBuketa.text.toString()
+
+            // dodaje se buket u bazu
+            NetworkService.addBouquet(total, opisBuketa, nazivBuketa, this, requireContext()) // dodavanje u tablicu buket
         }
     }
 

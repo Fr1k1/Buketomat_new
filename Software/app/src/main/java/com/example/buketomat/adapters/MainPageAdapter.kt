@@ -9,7 +9,7 @@ import kotlin.reflect.KClass
 
 class MainPageAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle) : FragmentStateAdapter(fragmentManager,lifecycle) {
 
-    data class FragmentItem(val titleRes: Int, val iconRes: Int, val fragmentClass: KClass<*>)
+    data class FragmentItem(val titleRes: Int?, val iconRes: Int, val fragmentClass: KClass<*>)
 
     val fragmentItems = ArrayList<FragmentItem>()
 

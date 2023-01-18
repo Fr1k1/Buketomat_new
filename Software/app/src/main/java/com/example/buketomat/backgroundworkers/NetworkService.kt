@@ -52,7 +52,7 @@ object NetworkService {
                     callback.onUsersReceived(users)
                 }
             },
-            { reportError(it) })
+            { reportError(context,it) })
         queue.add(jsonRequest)
     }
 
@@ -81,7 +81,7 @@ object NetworkService {
 
                 }
             },
-            { reportError(it) })
+            { reportError(context,it) })
         queue.add(jsonRequest)
     }
 
@@ -111,7 +111,7 @@ object NetworkService {
                 Log.d("API", response.toString())
 
             },
-            { reportError(it) })
+            { reportError(context,it) })
         queue.add(jsonRequest)
     }
 
@@ -141,7 +141,7 @@ object NetworkService {
                     Toast.makeText(context, "Greška prilikom unosa buketa", Toast.LENGTH_LONG).show()
                 }
             },
-            { reportError(it) })
+            { reportError(context,it) })
         queue.add(jsonRequest)
     }
 
@@ -172,7 +172,7 @@ object NetworkService {
                     Toast.makeText(context, "Greška prilikom unosa narudžbe", Toast.LENGTH_LONG).show()
                 }
             },
-            { reportError(it) })
+            { reportError(context,it) })
         queue.add(jsonRequest)
     }
 
@@ -206,7 +206,7 @@ object NetworkService {
                     Toast.makeText(context, "Greška prilikom unosa narudžbe", Toast.LENGTH_LONG).show()
                 }
             },
-            { reportError(it) })
+            { reportError(context,it) })
         queue.add(jsonRequest)
     }
 
@@ -238,7 +238,7 @@ object NetworkService {
                     Toast.makeText(context, "Greška prilikom unosa narudžbe", Toast.LENGTH_LONG).show()
                 }
             },
-            { reportError(it) })
+            { reportError(context,it) })
         queue.add(jsonRequest)
     }
 
@@ -262,7 +262,7 @@ object NetworkService {
                     callback.AddFlowersToList(flowers)
                 }
             },
-            { reportError(it) })
+            { reportError(context,it) })
         queue.add(jsonRequest)
     }
 
@@ -290,7 +290,7 @@ object NetworkService {
                     callback.AddBouquetsToList(bouquetById)
                 }
             },
-            { reportError(it) })
+            { reportError(context,it) })
         queue.add(jsonRequest)
     }
 
@@ -313,7 +313,7 @@ object NetworkService {
                     callback.AddBouquetsToList(bouquets)
                 }
             },
-            { reportError(it) })
+            { reportError(context,it) })
         queue.add(jsonRequest)
     }
 
@@ -341,13 +341,14 @@ object NetworkService {
 
                 }
             },
-            { reportError(it) })
+            { reportError(context,it) })
         queue.add(jsonRequest)
     }
 
-    private fun reportError(error: VolleyError) {
+    private fun reportError(context : Context, error: VolleyError) {
         Log.d("API", "Something went wrong while establishing connection to server")
         Log.e("Volly Error", error.toString());
+        Toast.makeText(context,"Došlo je do greške sa serverom,pokušajte kasnije!!!",Toast.LENGTH_LONG).show()
 
 
     }

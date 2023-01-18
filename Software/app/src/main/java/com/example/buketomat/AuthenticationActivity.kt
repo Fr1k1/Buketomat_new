@@ -28,14 +28,14 @@ class AuthenticationActivity : AppCompatActivity() {
 
         val authPagerAdapter = MainPageAdapter(supportFragmentManager, lifecycle)
 
-        authPagerAdapter.AddFragment(MainPageAdapter.FragmentItem(R.string.registration, R.drawable.ic_launcher_background,RegistrationFragment::class))
-        authPagerAdapter.AddFragment(MainPageAdapter.FragmentItem(R.string.login,R.drawable.ic_launcher_background,LoginFragment::class))
+        authPagerAdapter.AddFragment(MainPageAdapter.FragmentItem(R.string.registration, R.drawable.ic_baseline_app_registration_24,RegistrationFragment::class))
+        authPagerAdapter.AddFragment(MainPageAdapter.FragmentItem(R.string.login,R.drawable.ic_baseline_login_24,LoginFragment::class))
 
         viewPager.adapter = authPagerAdapter
 
         TabLayoutMediator(tabLayout,viewPager){
                 tab,position ->
-            tab.setText(authPagerAdapter.fragmentItems[position].titleRes)
+            authPagerAdapter.fragmentItems[position].titleRes?.let { tab.setText(it) }
             tab.setIcon(authPagerAdapter.fragmentItems[position].iconRes)
         }.attach()
     }

@@ -60,21 +60,17 @@ class MainActivity : AppCompatActivity() , BouquetClickListener {
 
         val mainPageAdapter = MainPageAdapter(supportFragmentManager, lifecycle)
 
-
-        /*mainPageAdapter.AddFragment(MainPageAdapter.FragmentItem(R.string.registration, R.drawable.ic_launcher_background,RegistrationFragment::class))
-        mainPageAdapter.AddFragment(MainPageAdapter.FragmentItem(R.string.login,R.drawable.ic_launcher_background,LoginFragment::class))
-        */
-        mainPageAdapter.AddFragment(MainPageAdapter.FragmentItem(R.string.mail_fragment,R.drawable.ic_baseline_shopping_bag_24,EmailFragment::class))
-        mainPageAdapter.AddFragment(MainPageAdapter.FragmentItem(R.string.finished_bouquets_fragment,R.drawable.ic_baseline_shopping_bag_24,FinishedBouquetsFragment::class))
-        mainPageAdapter.AddFragment(MainPageAdapter.FragmentItem(R.string.orders,R.drawable.ic_baseline_shopping_bag_24,OrdersFragment::class))
-        mainPageAdapter.AddFragment(MainPageAdapter.FragmentItem(R.string.new_order,R.drawable.ic_baseline_add_24,NewBouquetFragment::class))
+        mainPageAdapter.AddFragment(MainPageAdapter.FragmentItem(null,R.drawable.flower,FinishedBouquetsFragment::class))
+        mainPageAdapter.AddFragment(MainPageAdapter.FragmentItem(null,R.drawable.icons8_flower_bouquet_100__1_,NewBouquetFragment::class))
+        mainPageAdapter.AddFragment(MainPageAdapter.FragmentItem(null,R.drawable.ic_baseline_shopping_bag_24,OrdersFragment::class))
+        mainPageAdapter.AddFragment(MainPageAdapter.FragmentItem(null,R.drawable.ic_baseline_email_24,EmailFragment::class))
 
 
         viewPager.adapter = mainPageAdapter
 
         TabLayoutMediator(tabLayout,viewPager){
                 tab,position ->
-            tab.setText(mainPageAdapter.fragmentItems[position].titleRes)
+                mainPageAdapter.fragmentItems[position].titleRes?.let { tab.setText(it) }
             tab.setIcon(mainPageAdapter.fragmentItems[position].iconRes)
         }.attach()
     }

@@ -33,7 +33,7 @@ class OrderDetailsDialog : OrderBouquetsSync {
     {
         val tvOrderPrice : TextView= view.findViewById(R.id.tvOrderDetails_price)
         val baseText : String = view.context.resources.getString(R.string.iznos);
-        tvOrderPrice.text = baseText + order.FinalPrice.toString();
+        tvOrderPrice.text = baseText + order.FinalPrice.toString() + " EUR";
     }
 
     fun setOrderDate()

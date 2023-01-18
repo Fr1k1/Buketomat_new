@@ -8,10 +8,7 @@ import com.android.volley.VolleyError
 import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.Volley
 import com.example.buketomat.entites.User
-import com.example.buketomat.models.Bouquet
-import com.example.buketomat.models.Flower
-import com.example.buketomat.models.Order
-import com.example.buketomat.models.OrderBouquet
+import com.example.buketomat.models.*
 import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
@@ -35,9 +32,7 @@ object NetworkService {
         val jsonUser = JSONObject()
         jsonUser.put("korime", korisnikKorime)
         jsonUser.put("lozinka", korisnikLozinka)
-
         val requestBody = JSONArray().put(jsonUser)
-
         Log.d("JSON", requestBody.toString())
 
         val jsonRequest = JsonArrayRequest(Request.Method.POST,
@@ -58,7 +53,6 @@ object NetworkService {
                 }
             },
             { reportError(it) })
-
         queue.add(jsonRequest)
     }
 
@@ -116,6 +110,67 @@ object NetworkService {
             { response ->
                 Log.d("API", response.toString())
 
+            },
+            { reportError(it) })
+        queue.add(jsonRequest)
+    }
+
+    fun addBouquet(total : Double, opisBuketa : String, nazivBuketa : String, callback: BouquetsSync, context: Context) {
+        val queue = Volley.newRequestQueue(context)
+        val url = baseurl + "InsertBouquet.php"
+        val jsonUser = JSONObject()
+
+        jsonUser.put("naziv",nazivBuketa)
+        jsonUser.put("opis", opisBuketa)
+        jsonUser.put("cijena", total)
+        jsonUser.put("slika", "https://i.ibb.co/2vY51FV/custom-Buket.jpg")
+
+        val requestBody = JSONArray().put(jsonUser)
+        Log.d("JSON", requestBody.toString())
+
+        val jsonRequest = JsonArrayRequest(Request.Method.POST,
+            url,
+            requestBody,
+            { response ->
+                Log.d("API", response.toString())
+                try {
+                    callback.onBouquetAdded(response.getJSONObject(0).getString("entryId").toInt())
+                }
+                catch (ex : JSONException)
+                {
+                    Toast.makeText(context, "Greška prilikom unosa buketa", Toast.LENGTH_LONG).show()
+                }
+            },
+            { reportError(it) })
+        queue.add(jsonRequest)
+    }
+
+    fun addBouquetItem(item: FlowerBouquet, orderId : Int, callback: BouquetsSync, context: Context) {
+        val queue = Volley.newRequestQueue(context)
+        val url = baseurl + "InsertBouquetItem.php"
+        val jsonUser = JSONObject()
+        jsonUser.put("cvijet_id", item.Id)
+        jsonUser.put("buket_id",orderId )
+        jsonUser.put("kolicina", item.kolicina)
+
+
+        val requestBody = JSONArray().put(jsonUser)
+        Log.d("JSON", requestBody.toString())
+
+        val jsonRequest = JsonArrayRequest(Request.Method.POST,
+            url,
+            requestBody,
+
+            { response ->
+                Log.d("API", response.toString())
+                try {
+                    response.getJSONObject(0).getString("success") // if this doesn't cause exception then its success
+                    callback.onBouquetItemAdded()
+                }
+                catch (ex : JSONException)
+                {
+                    Toast.makeText(context, "Greška prilikom unosa narudžbe", Toast.LENGTH_LONG).show()
+                }
             },
             { reportError(it) })
         queue.add(jsonRequest)

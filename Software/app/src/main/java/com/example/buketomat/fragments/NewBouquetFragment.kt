@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -20,9 +21,9 @@ import com.example.buketomat.adapters.OrdersAdapter
 import com.example.buketomat.backgroundworkers.BouquetsSync
 import com.example.buketomat.backgroundworkers.FlowersSync
 import com.example.buketomat.backgroundworkers.NetworkService
-import com.example.buketomat.models.Bouquet
-import com.example.buketomat.models.Flower
-import com.example.buketomat.models.Order
+import com.example.buketomat.entites.User
+import com.example.buketomat.models.*
+import java.util.jar.Attributes.Name
 
 class NewBouquetFragment : Fragment(), FlowersSync, BouquetsSync {
 
@@ -33,6 +34,9 @@ class NewBouquetFragment : Fragment(), FlowersSync, BouquetsSync {
     private lateinit var rvFlowers : RecyclerView
     lateinit var btnDodajAutomatski : Button
     lateinit var btnNapraviBuket : Button
+    lateinit var etOpisBuketa : EditText
+
+    val listaCvijecaUBuketu = mutableListOf<FlowerBouquet>() // ima i atribut kolicina
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,6 +52,7 @@ class NewBouquetFragment : Fragment(), FlowersSync, BouquetsSync {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         btnDodajAutomatski = view.findViewById(R.id.btnDodajAutomatski)
         btnNapraviBuket = view.findViewById(R.id.btnNapraviBuket)
+        etOpisBuketa = view.findViewById(R.id.etOpisBuketa)
 
         btnDodajAutomatski.setOnClickListener{
             val randomBroj = (1..10).random()
@@ -57,6 +62,9 @@ class NewBouquetFragment : Fragment(), FlowersSync, BouquetsSync {
         }
 
         btnNapraviBuket.setOnClickListener {
+            var total = 0.0
+            var nazivBuketa = "Buket ";
+            var opisBuketa = "Custom buket, cvijece: ";
             val itemCount = rvFlowers.adapter?.itemCount
             for (i in 0 until itemCount!!) {
 
@@ -70,10 +78,34 @@ class NewBouquetFragment : Fragment(), FlowersSync, BouquetsSync {
 
                     // dohvati samo kojima je kolicina promijenjena
                     if (flowerKolicinaView.text.toString().toInt() > 0 ) {
-                        Toast.makeText(context, "Ime: " + flowerNameView.text.toString() + " id: " + flowerId + " kolicina: " + flowerKolicinaView.text.toString(), Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context, flowerPriceView.text.toString() +" Ime: " + flowerNameView.text.toString() + " id: " + flowerId + " kolicina: " + flowerKolicinaView.text.toString(), Toast.LENGTH_SHORT).show()
+                        nazivBuketa += flowerNameView.text.toString() + " ";
+                        opisBuketa += flowerKolicinaView.text.toString() + " " + flowerNameView.text.toString() + " ";
+
+                        // racunanje ukupne cijene buketa
+                        total += flowerKolicinaView.text.toString().toDouble() * flowerPriceView.text.toString().toDouble();
+                        Toast.makeText(context, total.toString(), Toast.LENGTH_SHORT).show()
+
+
+                        var cvijet = Flower(
+                            Id = flowerId,
+                            Name = flowerNameView.text.toString(),
+                            Price = flowerPriceView.text.toString().toDouble()
+                        )
+
+                        var cvijetBuket = FlowerBouquet( // objekt za buket_cvijet tablicu
+                            cvijet,
+                            flowerKolicinaView.text.toString().toInt()
+                        )
+                        listaCvijecaUBuketu.add(cvijetBuket);
                     }
                 }
             }
+            // dodaje se jos korisnikov opis
+            opisBuketa += etOpisBuketa.text.toString()
+
+            // dodaje se buket u bazu
+            NetworkService.addBouquet(total, opisBuketa, nazivBuketa, this, requireContext()) // dodavanje u tablicu buket
         }
     }
 
@@ -96,6 +128,22 @@ class NewBouquetFragment : Fragment(), FlowersSync, BouquetsSync {
         val bouquetAdapter = BouquetsAdapter(result as ArrayList<Bouquet>,activity as MainActivity)
         rvRandomFinishedBouquet.layoutManager = LinearLayoutManager(requireView().context)
         rvRandomFinishedBouquet.adapter = bouquetAdapter
+    }
+
+    override fun onBouquetAdded(orderId: Int) {
+         listaCvijecaUBuketu.forEach { item ->
+              NetworkService.addBouquetItem(item,orderId,this, requireContext()); // dodaje se svaki cvijet u buket_cvijet
+         }
+    }
+
+    var counter : Int = 0;
+    override fun onBouquetItemAdded() {
+        counter++
+        if(counter == listaCvijecaUBuketu.size)
+        {
+            // uspjesan unos svega
+            counter = 0;
+        }
     }
 
 }

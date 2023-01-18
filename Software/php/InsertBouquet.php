@@ -26,7 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo json_encode($response);
     } 
     else {
-        $sql = "INSERT INTO buket(naziv, opis, cijena) VALUES ('$data->naziv', '$data->opis','$data->cijena')";
+        $sql = "INSERT INTO buket(naziv, opis, cijena,slika) VALUES ('$data->naziv', '$data->opis','$data->cijena','$data->slika')";
         
 
         if ($conn->query($sql) === TRUE) {

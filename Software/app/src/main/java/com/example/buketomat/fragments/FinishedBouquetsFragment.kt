@@ -48,4 +48,12 @@ class FinishedBouquetsFragment : Fragment(), BouquetsSync {
         rvFinishedBouquets.adapter = bouquetAdapter
 
         }
+
+    override fun onBouquetAdded(orderId: Int) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onBouquetItemAdded() {
+        TODO("Not yet implemented")
+    }
 }

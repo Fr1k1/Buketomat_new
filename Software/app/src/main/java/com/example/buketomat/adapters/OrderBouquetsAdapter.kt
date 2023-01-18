@@ -24,6 +24,7 @@ class OrderBouquetsAdapter(private val orderBouquets : ArrayList<OrderBouquet>):
         private val bouquetCount : TextView
 
 
+
         init {
             bouquetName = view.findViewById(R.id.tv_bouquetName)
             bouquetDescription = view.findViewById(R.id.tv_bouquetDescription)

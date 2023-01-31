@@ -56,7 +56,7 @@ class NewBouquetFragment : Fragment(), FlowersSync, BouquetsSync {
 
         btnDodajAutomatski.setOnClickListener{
             val randomBroj = (1..10).random()
-            Toast.makeText(context, "Random buket ID: " + randomBroj.toString(), Toast.LENGTH_SHORT).show()
+            // Toast.makeText(context, "Random buket ID: " + randomBroj.toString(), Toast.LENGTH_SHORT).show()
             // za random buket
             NetworkService.getBouquetById(randomBroj,this, requireContext())
         }
@@ -78,14 +78,14 @@ class NewBouquetFragment : Fragment(), FlowersSync, BouquetsSync {
 
                     // dohvati samo kojima je kolicina promijenjena
                     if (flowerKolicinaView.text.toString().toInt() > 0 ) {
-                        Toast.makeText(context, flowerPriceView.text.toString() +" Ime: " + flowerNameView.text.toString() + " id: " + flowerId + " kolicina: " + flowerKolicinaView.text.toString(), Toast.LENGTH_SHORT).show()
+                        //Toast.makeText(context, flowerPriceView.text.toString() +" Ime: " + flowerNameView.text.toString() + " id: " + flowerId + " kolicina: " + flowerKolicinaView.text.toString(), Toast.LENGTH_SHORT).show()
                         nazivBuketa += flowerNameView.text.toString() + " ";
                         opisBuketa += flowerKolicinaView.text.toString() + " " + flowerNameView.text.toString() + " ";
 
                         // racunanje ukupne cijene buketa
                         total += flowerKolicinaView.text.toString().toDouble() * flowerPriceView.text.toString().toDouble();
-                        Toast.makeText(context, total.toString(), Toast.LENGTH_SHORT).show()
-
+                       // Toast.makeText(context, total.toString(), Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context, "Uspješno dodan!", Toast.LENGTH_SHORT).show()
 
                         var cvijet = Flower(
                             Id = flowerId,

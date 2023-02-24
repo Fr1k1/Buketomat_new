@@ -3,11 +3,11 @@
 ## Projektni tim
 
 
-Ime i prezime | E-mail adresa (FOI) | JMBAG | Github korisničko ime | Seminarska grupa
-------------  | ------------------- | ----- | --------------------- | ----------------
-Martin Friščić | mfriscic20@student.foi.hr |  | mfriscic20 | G02
-Ana Škarica | askarica20@student.foi.hr |  | askarica20 | G02
-Filip Milohanović | fmilohano20@student.foi.hr |  | fmilohano20 | G02
+Ime i prezime | E-mail adresa (FOI) |  Github korisničko ime | 
+------------  | ------------------- |  --------------------- | 
+Martin Friščić | mfriscic20@student.foi.hr |   Fr1k1 | 
+Ana Škarica | askarica20@student.foi.hr |   askarica20 | 
+Filip Milohanović | fmilohano20@student.foi.hr   | fmilohano20 | 
 
 ## Opis domene
 <!--Umjesto ovih uputa opišite domenu ili problem koji pokrivate vašim projektom. Domena može biti proizvoljna, ali obratite pozornost da sukladno ishodima učenja, domena omogući primjenu zahtijevanih koncepata kako je to navedeno u sljedećem poglavlju. Priložite odgovarajuće skice gdje je to prikladno.-->
@@ -39,20 +39,32 @@ F09 | Odabir termina dostave | Sustav će omogućiti odabir termina dostave buke
 <li>MySQL Workbench</li>
 </ul>
 
-<h3>Literatura</h3>
-<ul>
-<li>Literatura s kolegija RAMPU</li>
-<li>Internet stranice sa službenom dokumentacijom</li>
-<li>Službeni kod izrađen na laboratorijskim vježbama</li>
 
-</ul>
+<h2>Some screenshots: <h2/>
 
-<h3>Oprema</h3>
-<ul>
-<li>Osobno računalo</li>
-<li>Pametni telefon sa sustavom Android</li>
-<li>USB kabel za povezivanje uređaja</li>
-</ul>
+<p align="center">
+
+<img src="https://github.com/Fr1k1/Buketomat/blob/master/rampu22-askarica20-mfriscic20-fmilohano20-master/Screenshots/Screenshot_1675860793.png"  height="500">
+<br/>
+<br/>
+
+<img src="https://github.com/Fr1k1/Buketomat/blob/master/rampu22-askarica20-mfriscic20-fmilohano20-master/Screenshots/Screenshot_1675860825.png" height="500">
+<br/>
+<br/>
+
+<img src="https://github.com/Fr1k1/Buketomat/blob/master/rampu22-askarica20-mfriscic20-fmilohano20-master/Screenshots/Screenshot_1675860831.png" height="500">
+<br/> <br/>
+
+<img src="https://github.com/Fr1k1/Buketomat/blob/master/rampu22-askarica20-mfriscic20-fmilohano20-master/Screenshots/Screenshot_1675860838.png" height="500">
+<br/> <br/>
+
+<img src="https://github.com/Fr1k1/Buketomat/blob/master/rampu22-askarica20-mfriscic20-fmilohano20-master/Screenshots/Screenshot_1675860842.png" height="500">
+<br/> <br/>
+
+<img src="https://github.com/Fr1k1/Buketomat/blob/master/rampu22-askarica20-mfriscic20-fmilohano20-master/Screenshots/Screenshot_1675860854.png" height="500">
+<br/> <br/>
+
+</p>
 
 
 

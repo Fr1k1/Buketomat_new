@@ -44,27 +44,12 @@ F09 | Odabir termina dostave | Sustav će omogućiti odabir termina dostave buke
 
 <p align="center">
 
-<img src="https://github.com/Fr1k1/Buketomat/blob/master/rampu22-askarica20-mfriscic20-fmilohano20-master/Screenshots/Screenshot_1675860793.png"  height="500">
-<br/>
-<br/>
-
-<img src="https://github.com/Fr1k1/Buketomat/blob/master/rampu22-askarica20-mfriscic20-fmilohano20-master/Screenshots/Screenshot_1675860825.png" height="500">
-<br/>
-<br/>
-
-<img src="https://github.com/Fr1k1/Buketomat/blob/master/rampu22-askarica20-mfriscic20-fmilohano20-master/Screenshots/Screenshot_1675860831.png" height="500">
-<br/> <br/>
-
-<img src="https://github.com/Fr1k1/Buketomat/blob/master/rampu22-askarica20-mfriscic20-fmilohano20-master/Screenshots/Screenshot_1675860838.png" height="500">
-<br/> <br/>
-
-<img src="https://github.com/Fr1k1/Buketomat/blob/master/rampu22-askarica20-mfriscic20-fmilohano20-master/Screenshots/Screenshot_1675860842.png" height="500">
-<br/> <br/>
-
-<img src="https://github.com/Fr1k1/Buketomat/blob/master/rampu22-askarica20-mfriscic20-fmilohano20-master/Screenshots/Screenshot_1675860854.png" height="500">
-<br/> <br/>
-
-</p>
+<img src="https://github.com/CroAnna/Buketomat/blob/master/screenshots/popis-buketa.png" width="220px"></img>
+<img src="https://github.com/CroAnna/Buketomat/blob/master/screenshots/izrada-vlastitog-buketa.png" width="220px"></img>
+<img src="https://github.com/CroAnna/Buketomat/blob/master/screenshots/moja-narudzba.png" width="220px"></img>
+<img src="https://github.com/CroAnna/Buketomat/blob/master/screenshots/kosarica.png" width="220px"></img>
+<img src="https://github.com/CroAnna/Buketomat/blob/master/screenshots/odabir-preuzimanja.png" width="220px"></img>
+<img src="https://github.com/CroAnna/Buketomat/blob/master/screenshots/slanje-maila.png" width="220px"></img>
 
 
 
